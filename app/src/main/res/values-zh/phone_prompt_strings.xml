@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="phone_prompt_approval_title">DSH Compose · 请你授权</string>
+    <string name="phone_prompt_review_title">DSH Compose · 等你查看</string>
+    <string name="phone_prompt_native_title">DSH Compose · 手机操控确认</string>
+    <string name="phone_prompt_handoff_title">DSH Compose · 请你操作</string>
+    <string name="phone_prompt_allow_once">允许一次</string>
+    <string name="phone_prompt_allow_app">本任务允许操作此应用</string>
+    <string name="phone_prompt_allow_task">本任务免确认</string>
+    <string name="phone_prompt_reject">拒绝</string>
+    <string name="phone_prompt_open">去查看</string>
+    <string name="phone_prompt_later">稍后</string>
+    <string name="phone_prompt_stop">停止任务</string>
+    <string name="phone_prompt_continue">继续</string>
+    <string name="phone_prompt_remaining">剩余 %1$d 秒 · 未回应不会授权</string>
+    <string name="phone_prompt_result_channel">手机操控结果</string>
+    <string name="phone_prompt_result_title">DSH Compose · 任务完成</string>
+    <string name="phone_prompt_result_text">查看结果</string>
+    <string name="phone_install_new">安装这个应用？\n\n%1$s\n包名：%2$s\n版本：%3$s（%4$d）\n新安装\n目标设备：%5$s\n设备 ID：%6$s\n\n请只允许你信任的应用。安装结束前暂停手机操控输入，随后还需你在系统安装器中确认。</string>
+    <string name="phone_install_update">更新这个应用？\n\n%1$s\n包名：%2$s\n版本：%3$s（%4$d）\n覆盖已安装的应用\n目标设备：%5$s\n设备 ID：%6$s\n\n请只允许你信任的应用。安装结束前暂停手机操控输入，随后还需你在系统安装器中确认。</string>
+</resources>

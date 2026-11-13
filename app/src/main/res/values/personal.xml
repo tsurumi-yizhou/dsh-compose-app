@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="personalization_title">Personalization</string>
+    <string name="personalization_subtitle">Personal preferences and agent presets</string>
+    <string name="personalization_about_you">About you</string>
+    <string name="personalization_work_style">How it works</string>
+    <string name="personalization_agent_presets">Agent presets</string>
+    <string name="personalization_not_set">Not set</string>
+    <string name="reply_prefs_title">Personal preferences</string>
+    <string name="reply_prefs_description">Used by new conversations on the local engine.</string>
+    <string name="reply_prefs_hint">For example: Reply in Chinese. I mainly write Kotlin.</string>
+    <string name="reply_prefs_unavailable">Install the engine on this phone to edit personal preferences.</string>
+    <string name="reply_prefs_save">Save</string>
+    <string name="reply_prefs_saving">Saving…</string>
+    <string name="reply_prefs_saved">Saved</string>
+    <string name="reply_prefs_unsaved">Unsaved changes</string>
+    <string name="reply_prefs_save_failed">Could not save. Try again.</string>
+</resources>

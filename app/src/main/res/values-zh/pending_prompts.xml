@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pending_title">待处理消息</string>
+    <string name="pending_sending">正在发送到主机</string>
+    <string name="pending_uncertain">发送结果不确定</string>
+    <string name="pending_accepted">主机已接收，等待实际送达记录</string>
+    <string name="pending_rejected">主机已拒绝</string>
+    <string name="pending_quote">引用：%1$s</string>
+    <string name="pending_attachments">附件：%1$s</string>
+    <string name="pending_uncertain_help">主机可能已经接收此消息。重试会使用同一个请求标识发送原内容，不会自动重发。</string>
+    <string name="pending_retry">重试原请求</string>
+    <string name="pending_restore">恢复被拒绝的草稿</string>
+    <string name="pending_next_step">等待下一步骤</string>
+    <string name="pending_next_turn">等待下一轮</string>
+    <string name="pending_automatic">后台任务结果</string>
+    <string name="pending_nontext">队列内容包含附件</string>
+    <string name="pending_withdraw">撤回并恢复草稿</string>
+    <string name="pending_steer">用于当前轮次</string>
+    <string name="pending_edit">编辑排队文本</string>
+    <string name="pending_remove">移除排队消息</string>
+    <string name="pending_remove_warning">从主机队列移除此消息？仅在主机确认后移除。</string>
+    <string name="pending_text">消息</string>
+    <string name="pending_save">保存到主机</string>
+    <string name="pending_cancel">取消</string>
+    <string name="pending_expand">展开待处理消息</string>
+    <string name="pending_collapse">折叠待处理消息</string>
+    <plurals name="pending_summary">
+        <item quantity="other">%1$d 条消息</item>
+    </plurals>
+</resources>

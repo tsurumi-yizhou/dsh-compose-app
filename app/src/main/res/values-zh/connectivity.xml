@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="connectivity_title">连接详情</string>
+    <string name="connectivity_local">此手机</string>
+    <string name="connectivity_status">状态</string>
+    <string name="connectivity_connected">已连接</string>
+    <string name="connectivity_disconnected">未连接</string>
+    <string name="connectivity_type">连接类型</string>
+    <string name="connectivity_service">Compose 服务</string>
+    <string name="connectivity_path">当前路径</string>
+    <string name="connectivity_unknown">未知</string>
+    <string name="connectivity_service_help">通过 HTTPS 和配对后的设备凭据连接独立部署的服务。</string>
+</resources>

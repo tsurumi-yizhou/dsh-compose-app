@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pending_title">Pending messages</string>
+    <string name="pending_sending">Sending to host</string>
+    <string name="pending_uncertain">Delivery result is unknown</string>
+    <string name="pending_accepted">Accepted by host; awaiting delivery evidence</string>
+    <string name="pending_rejected">Rejected by host</string>
+    <string name="pending_quote">Quote: %1$s</string>
+    <string name="pending_attachments">Attachments: %1$s</string>
+    <string name="pending_uncertain_help">The host may already have accepted this message. Retry sends the original content with the same request ID. It is never resent automatically.</string>
+    <string name="pending_retry">Retry original request</string>
+    <string name="pending_restore">Restore rejected draft</string>
+    <string name="pending_next_step">Waiting for the next step</string>
+    <string name="pending_next_turn">Waiting for the next turn</string>
+    <string name="pending_automatic">Background task result</string>
+    <string name="pending_nontext">Queued content includes attachments</string>
+    <string name="pending_withdraw">Withdraw and restore</string>
+    <string name="pending_steer">Use in current turn</string>
+    <string name="pending_edit">Edit queued text</string>
+    <string name="pending_remove">Remove queued message</string>
+    <string name="pending_remove_warning">Remove this message from the host queue? It is removed only after the host confirms.</string>
+    <string name="pending_text">Message</string>
+    <string name="pending_save">Save on host</string>
+    <string name="pending_cancel">Cancel</string>
+    <string name="pending_expand">Expand pending messages</string>
+    <string name="pending_collapse">Collapse pending messages</string>
+    <plurals name="pending_summary">
+        <item quantity="one">%1$d message</item>
+        <item quantity="other">%1$d messages</item>
+    </plurals>
+</resources>

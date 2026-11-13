@@ -1,0 +1,92 @@
+package dev.fughetta.dshcompose.notify
+
+/**
+ * What the live activity says: one ongoing notification Android 16 promotes to a Live Update (the
+ * status bar chip, the top of the shade, the lock screen), and that HyperOS, ColorOS and MagicOS
+ * draw in their islands. Pure, so the JVM tests cover it.
+ *
+ * Two sources: phone control (native, [LiveActivity] builds it) and the agent's runs (reduced by
+ * the native notification controller from Host events). Phone control wins: DSH driving the phone
+ * is what the person must be able to see and stop.
+ */
+data class LiveContent(
+    val kind: Kind,
+    val title: String,
+    val text: String,
+    /** The chip's words (`shortCriticalText`); null: the chip shows the run's clock. */
+    val chip: String?,
+    /** What the lock screen shows when it hides sensitive content. */
+    val publicText: String,
+    /** Wall-clock start: the chronometer counts from it; null: no clock. */
+    val sinceMs: Long? = null,
+    /** The conversation a tap opens; null opens the app. */
+    val sessionId: String? = null,
+    val host: String? = null,
+    val eventId: String? = null,
+) {
+    enum class Kind(val wire: String) {
+        PHONE("phone"),
+        WAITING("waiting"),
+        RUNNING("running"),
+        DONE("done"),
+        FAILED("failed");
+
+        companion object {
+            fun parse(wire: Any?): Kind? = values().firstOrNull { it.wire == wire }
+        }
+    }
+
+    /** Still going: an indeterminate bar, refreshed while it lasts. */
+    val busy: Boolean
+        get() = kind == Kind.PHONE || kind == Kind.RUNNING
+
+    /** A finish, shown for a moment: posted with a short timeout in case no update follows. */
+    val ending: Boolean
+        get() = kind == Kind.DONE || kind == Kind.FAILED
+
+    /** The status bar chip's words; null while a run counts up, so the chip shows its clock. */
+    val chipWords: String?
+        get() = if (kind == Kind.RUNNING && sinceMs != null) null else chip
+
+    /**
+     * What the card's 「停止」 cancels: the Host and session, when a conversation is still running and
+     * the button can name its target. Null on a card that has nothing to stop.
+     */
+    val stopTarget: Pair<String, String>?
+        get() {
+            if (kind != Kind.RUNNING || ending) return null
+            val host = host ?: return null
+            val session = sessionId ?: return null
+            return host to session
+        }
+
+    companion object {
+        /** The agent's live activity payload; null for a missing or malformed one. */
+        fun fromMap(m: Map<*, *>?): LiveContent? {
+            m ?: return null
+            val kind = Kind.parse(m["kind"])?.takeIf { it != Kind.PHONE } ?: return null
+            val title = (m["title"] as? String)?.takeIf { it.isNotBlank() } ?: return null
+            fun str(key: String, max: Int) =
+                (m[key] as? String)?.takeIf { it.isNotEmpty() }?.take(max)
+            return LiveContent(
+                kind = kind,
+                title = title.take(TITLE_MAX),
+                text = str("text", TEXT_MAX).orEmpty(),
+                chip = str("chip", CHIP_MAX),
+                publicText = str("publicText", TEXT_MAX) ?: title.take(TITLE_MAX),
+                sinceMs = (m["sinceMs"] as? Number)?.toLong()?.takeIf { it > 0 },
+                sessionId = str("sessionId", 200),
+                host = str("host", 400),
+                eventId = str("eventId", 200),
+            )
+        }
+
+        /** Phone control first, then the agent. */
+        fun pick(phone: LiveContent?, agent: LiveContent?): LiveContent? = phone ?: agent
+
+        const val TITLE_MAX = 80
+        const val TEXT_MAX = 160
+        /** Android shows a chip's text whole up to about seven characters. */
+        const val CHIP_MAX = 12
+    }
+}

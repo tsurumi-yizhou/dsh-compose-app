@@ -1,0 +1,35 @@
+<resources>
+    <string name="account_deepseek">DeepSeek account</string>
+    <string name="account_problem_title">Account unavailable</string>
+    <string name="account_local_engine">Sign-in uses the engine on this phone. Credentials stay in the engine.</string>
+    <string name="account_waiting">Waiting for account state</string>
+    <string name="account_signed_out">Sign in to use your DeepSeek account without an API key.</string>
+    <string name="account_sign_in">Sign in</string>
+    <string name="account_sign_out">Sign out</string>
+    <string name="account_cancel">Cancel</string>
+    <string name="account_waiting_browser">Complete sign-in in your browser.</string>
+    <string name="account_finishing">Finishing sign-in…</string>
+    <string name="account_preparing">Preparing sign-in…</string>
+    <string name="account_browser_returned">If sign-in is unfinished, reopen the browser.</string>
+    <string name="account_reopen">Reopen browser</string>
+    <string name="account_profile_failed">Profile could not be refreshed.</string>
+    <string name="account_balance_failed">Balance could not be refreshed.</string>
+    <string name="account_refresh">Refresh</string>
+    <string name="account_top_up">Top up</string>
+    <string name="account_usage">Usage</string>
+    <string name="account_key_alternative">An API key is another way to connect a model.</string>
+    <string name="account_manage_keys">Manage providers and API keys</string>
+    <string name="account_sign_out_running">Account tasks are running. Signing out may stop them. API keys remain configured.</string>
+    <string name="account_sign_out_body">Sign out of the local engine? API keys remain configured.</string>
+    <string name="account_sign_out_unknown">Task activity could not be checked. Signing out may stop account tasks. API keys remain configured.</string>
+    <string name="account_recharge_balance">Recharge balance</string>
+    <string name="account_bonus_balance">Bonus balance</string>
+    <string name="account_offline">DeepSeek could not be reached.</string>
+    <string name="account_service_error">The sign-in service is unavailable.</string>
+    <string name="account_rejected">Sign-in did not complete.</string>
+    <string name="account_timeout">Sign-in timed out. Try again.</string>
+    <string name="account_storage_error">The engine could not save the account.</string>
+    <string name="account_interrupted">The engine disconnected during sign-in.</string>
+    <string name="account_browser_unavailable">No browser could open sign-in.</string>
+    <string name="account_failed">The account request failed. Try again.</string>
+</resources>

@@ -1,0 +1,36 @@
+<resources>
+    <string name="terminal_refresh">Refresh</string>
+    <string name="terminal_new">New terminal</string>
+    <string name="terminal_keyboard">Keyboard</string>
+    <string name="terminal_unsupported">This connection cannot carry interactive terminal input.</string>
+    <string name="terminal_starting">Starting</string>
+    <string name="terminal_connecting">Connecting</string>
+    <string name="terminal_live">Connected</string>
+    <string name="terminal_read_only">Read only: another attachment holds input</string>
+    <string name="terminal_disconnected">Disconnected</string>
+    <string name="terminal_ended">Ended</string>
+    <string name="terminal_missing">Terminal no longer exists</string>
+    <string name="terminal_failed">Start failed</string>
+    <string name="terminal_reconnect">Reconnect / take input</string>
+    <string name="terminal_rename">Rename</string>
+    <string name="terminal_close">Close terminal</string>
+    <string name="terminal_paste">Paste</string>
+    <string name="terminal_save">Save</string>
+    <string name="terminal_cancel">Cancel</string>
+    <string name="terminal_close_title">End this terminal?</string>
+    <string name="terminal_close_text">This ends the shell and its child processes on the selected Host. Leaving the page keeps it running.</string>
+    <string name="terminal_clipboard_title">Allow terminal clipboard write?</string>
+    <string name="terminal_clipboard_text">The remote program requested to replace your phone clipboard. Allow this request once?</string>
+    <string name="terminal_allow">Allow</string>
+    <string name="terminal_open_link">Open this link?</string>
+    <string name="terminal_error_input_full">Input buffer is full; wait a moment</string>
+    <string name="terminal_error_unavailable">The terminal is unavailable; the engine may not support it or it already ended</string>
+    <string name="terminal_error_connection">The connection failed</string>
+    <string name="terminal_error_link">The link could not be opened</string>
+    <string name="terminal_error_unknown">Operation failed (%1$s)</string>
+    <string name="terminal_no_session">Open a conversation to use the terminal</string>
+    <string name="terminal_empty_title">No terminals yet</string>
+    <string name="terminal_shortcuts">Shortcut keys</string>
+    <string name="terminal_shortcuts_hide">Hide shortcut keys</string>
+    <string name="terminal_shortcuts_show">Show shortcut keys</string>
+</resources>

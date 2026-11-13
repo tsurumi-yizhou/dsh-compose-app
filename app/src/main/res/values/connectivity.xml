@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="connectivity_title">Connection details</string>
+    <string name="connectivity_local">This phone</string>
+    <string name="connectivity_status">Status</string>
+    <string name="connectivity_connected">Connected</string>
+    <string name="connectivity_disconnected">Disconnected</string>
+    <string name="connectivity_type">Connection type</string>
+    <string name="connectivity_service">Compose service</string>
+    <string name="connectivity_path">Current path</string>
+    <string name="connectivity_unknown">Unknown</string>
+    <string name="connectivity_service_help">Connect to the independently deployed service using HTTPS and a paired device credential.</string>
+</resources>

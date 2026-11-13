@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 插件能力（nativemedia/）：聆听指示与字幕的关闭键。 -->
+<resources>
+    <string name="native_media_close_caption">关闭字幕</string>
+</resources>

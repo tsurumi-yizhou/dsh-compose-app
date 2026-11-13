@@ -1,0 +1,86 @@
+name: Android CI
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+jobs:
+  android:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        flavor: [arm64, x64]
+    env:
+      FLAVOR: ${{ matrix.flavor }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v6.2.0
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: gradle/actions/setup-gradle@v6.4.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: 26.13.1
+      - name: Download host release
+        env:
+          GH_TOKEN: ${{ secrets.HOST_DOWNLOAD_TOKEN || github.token }}
+          HOST_RELEASE_TAG: ${{ vars.HOST_RELEASE_TAG }}
+        run: |
+          : "${HOST_RELEASE_TAG:?Set the HOST_RELEASE_TAG repository variable to a published Host release tag}"
+          mkdir -p .host
+          gh release download "$HOST_RELEASE_TAG" --repo tsurumi-yizhou/dsh-compose-host --pattern host.tgz --dir .host
+          mkdir -p "$HOME/.gradle"
+          echo "hostPackage=$GITHUB_WORKSPACE/.host/host.tgz" >> "$HOME/.gradle/gradle.properties"
+          echo "DSH_HOST_PACKAGE=$GITHUB_WORKSPACE/.host/host.tgz" >> "$GITHUB_ENV"
+      - name: Android SDK
+        run: "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager 'platforms;android-37.0' 'build-tools;37.0.0'"
+      - name: Formatting and build tasks
+        run: ./gradlew ktfmtCheck :app:verifyGuide :app:verifyReleaseDelta
+      - name: Kotlin tests and APK
+        run: |
+          variant="${FLAVOR^}"
+          ./gradlew --stacktrace :domain:test :data:testDebugUnitTest :data:local:testDebugUnitTest :data:protocol:test \
+            ":data:engine:test${variant}DebugUnitTest" ":app:test${variant}DebugUnitTest" ":app:assemble${variant}Debug"
+      - name: Android runtime tests
+        run: |
+          prefix="$RUNNER_TEMP/android-engine-tests"
+          mkdir -p "$prefix/package"
+          tar -xzf data/engine/build/generated/engineAssets/runtime/engine.tgz -C "$prefix/package"
+          cp "$prefix/package/locks/"*.json "$prefix/"
+          npm ci --prefix "$prefix" --ignore-scripts --no-audit --no-fund
+          cp -a "$prefix/package/overrides/." "$prefix/"
+          DSH_TEST_PREFIX="$prefix" python3 -m unittest discover -s data/engine/runtime/tests -p 'test_*.py'
+          node --test data/engine/runtime/tests/boot-cache.test.mjs data/engine/runtime/tests/auth/*.test.mjs
+      - name: Test reports
+        if: always()
+        uses: actions/upload-artifact@v7.0.2
+        with:
+          name: android-reports-${{ matrix.flavor }}
+          path: |
+            **/build/reports/
+            **/build/test-results/
+          retention-days: 14
+      - uses: actions/upload-artifact@v7.0.2
+        with:
+          name: debug-apk-${{ matrix.flavor }}
+          path: app/build/outputs/apk/${{ matrix.flavor }}/debug/*.apk
+          if-no-files-found: error
+  ci-ok:
+    name: CI OK
+    if: always()
+    needs: android
+    runs-on: ubuntu-24.04
+    steps:
+      - if: needs.android.result != 'success'
+        run: exit 1

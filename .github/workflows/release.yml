@@ -1,0 +1,78 @@
+name: Release
+
+on:
+  push:
+    tags: ['v[0-9]*']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: github-release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    environment: release-signing
+    env:
+      TZ: Asia/Shanghai
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v6.2.0
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: gradle/actions/setup-gradle@v6.4.1
+        with:
+          cache-disabled: true
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: 26.13.1
+      - name: Download host release
+        env:
+          GH_TOKEN: ${{ secrets.HOST_DOWNLOAD_TOKEN || github.token }}
+          HOST_RELEASE_TAG: ${{ vars.HOST_RELEASE_TAG }}
+        run: |
+          : "${HOST_RELEASE_TAG:?Set the HOST_RELEASE_TAG repository variable to a published Host release tag}"
+          mkdir -p .host
+          gh release download "$HOST_RELEASE_TAG" --repo tsurumi-yizhou/dsh-compose-host --pattern host.tgz --dir .host
+          mkdir -p "$HOME/.gradle"
+          echo "hostPackage=$GITHUB_WORKSPACE/.host/host.tgz" >> "$HOME/.gradle/gradle.properties"
+          echo "DSH_HOST_PACKAGE=$GITHUB_WORKSPACE/.host/host.tgz" >> "$GITHUB_ENV"
+      - name: Android SDK
+        run: "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager 'platforms;android-37.0' 'build-tools;37.0.0'"
+      - name: Restore signing key
+        env:
+          KEYSTORE_BASE64: ${{ secrets.STORE_BASE64 }}
+          DSH_SIGNING_STORE_FILE: ${{ runner.temp }}/release.jks
+        run: |
+          umask 077
+          printf '%s' "$KEYSTORE_BASE64" | base64 --decode > "$DSH_SIGNING_STORE_FILE"
+      - name: Build signed APKs
+        env:
+          DSH_SIGNING_STORE_FILE: ${{ runner.temp }}/release.jks
+          DSH_SIGNING_STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
+          DSH_SIGNING_KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          DSH_SIGNING_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: >-
+          ./gradlew --no-daemon --no-configuration-cache --no-build-cache
+          :app:assembleArm64Release :app:assembleX64Release
+          -PrequireReleaseSigning=true -PstarPrompt=true
+      - name: Remove signing material
+        if: always()
+        env:
+          DSH_SIGNING_STORE_FILE: ${{ runner.temp }}/release.jks
+        run: rm -f "$DSH_SIGNING_STORE_FILE"
+      - name: Create release draft
+        uses: softprops/action-gh-release@v3.0.4
+        with:
+          draft: true
+          generate_release_notes: true
+          fail_on_unmatched_files: true
+          files: |
+            app/build/outputs/apk/arm64/release/*.apk
+            app/build/outputs/apk/x64/release/*.apk

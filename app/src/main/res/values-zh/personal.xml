@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="personalization_title">个性化</string>
+    <string name="personalization_subtitle">个人偏好与 Agent 预设</string>
+    <string name="personalization_about_you">关于你</string>
+    <string name="personalization_work_style">工作方式</string>
+    <string name="personalization_agent_presets">Agent 预设</string>
+    <string name="personalization_not_set">未设置</string>
+    <string name="reply_prefs_title">个人偏好</string>
+    <string name="reply_prefs_description">用于本机引擎的新对话。</string>
+    <string name="reply_prefs_hint">比如：用中文回答，我主要写 Kotlin</string>
+    <string name="reply_prefs_unavailable">先在这台手机上安装引擎，才能编辑个人偏好。</string>
+    <string name="reply_prefs_save">保存</string>
+    <string name="reply_prefs_saving">正在保存…</string>
+    <string name="reply_prefs_saved">已保存</string>
+    <string name="reply_prefs_unsaved">有未保存的改动</string>
+    <string name="reply_prefs_save_failed">保存失败，请重试。</string>
+</resources>

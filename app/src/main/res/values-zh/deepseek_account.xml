@@ -1,0 +1,35 @@
+<resources>
+    <string name="account_deepseek">DeepSeek 账户</string>
+    <string name="account_problem_title">账户暂不可用</string>
+    <string name="account_local_engine">登录通过此手机上的引擎完成，凭据由引擎保管。</string>
+    <string name="account_waiting">正在获取账户状态</string>
+    <string name="account_signed_out">登录后可直接使用 DeepSeek 账户，无需 API 密钥。</string>
+    <string name="account_sign_in">登录</string>
+    <string name="account_sign_out">退出登录</string>
+    <string name="account_cancel">取消</string>
+    <string name="account_waiting_browser">请在浏览器完成登录。</string>
+    <string name="account_finishing">正在完成登录…</string>
+    <string name="account_preparing">正在准备登录…</string>
+    <string name="account_browser_returned">若尚未完成登录，可以重新打开浏览器。</string>
+    <string name="account_reopen">重新打开浏览器</string>
+    <string name="account_profile_failed">无法刷新个人资料。</string>
+    <string name="account_balance_failed">无法刷新余额。</string>
+    <string name="account_refresh">刷新</string>
+    <string name="account_top_up">充值</string>
+    <string name="account_usage">用量</string>
+    <string name="account_key_alternative">也可以使用 API 密钥连接模型。</string>
+    <string name="account_manage_keys">管理服务商与 API 密钥</string>
+    <string name="account_sign_out_running">账户任务仍在运行，退出登录可能中止任务，已配置的 API 密钥会保留。</string>
+    <string name="account_sign_out_body">退出本机引擎中的账户？已配置的 API 密钥会保留。</string>
+    <string name="account_sign_out_unknown">无法确认任务状态，退出登录可能中止账户任务，已配置的 API 密钥会保留。</string>
+    <string name="account_recharge_balance">充值余额</string>
+    <string name="account_bonus_balance">赠送余额</string>
+    <string name="account_offline">无法连接 DeepSeek。</string>
+    <string name="account_service_error">登录服务暂不可用。</string>
+    <string name="account_rejected">登录未完成。</string>
+    <string name="account_timeout">登录超时，请重试。</string>
+    <string name="account_storage_error">引擎无法保存账户。</string>
+    <string name="account_interrupted">登录期间引擎连接中断。</string>
+    <string name="account_browser_unavailable">没有浏览器能够打开登录页面。</string>
+    <string name="account_failed">账户请求失败，请重试。</string>
+</resources>

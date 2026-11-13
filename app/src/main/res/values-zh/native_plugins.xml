@@ -1,0 +1,22 @@
+<resources>
+    <string name="native_plugin_close">关闭</string>
+    <string name="native_plugin_cancel">取消</string>
+    <string name="native_plugin_allow">允许</string>
+    <string name="native_plugin_confirm">确认</string>
+    <string name="native_plugin_submit">提交</string>
+    <string name="native_plugin_invalid">无法显示此插件视图。</string>
+    <string name="native_plugin_invalid_value">请检查此项内容。</string>
+    <string name="native_plugin_link_consent">要在浏览器打开 %1$s 吗？</string>
+    <string name="native_plugin_read_consent">允许此插件读取：%1$s？</string>
+    <string name="native_plugin_draft">草稿</string>
+    <string name="native_plugin_clipboard">剪贴板</string>
+    <string name="native_plugin_message">所选消息</string>
+    <string name="native_plugin_composer">输入栏动作</string>
+    <string name="native_plugin_tools">输入栏工具</string>
+    <string name="native_plugin_message_actions">消息动作</string>
+    <string name="native_plugin_session_actions">会话动作</string>
+    <string name="native_plugin_strip">输入栏状态</string>
+    <string name="native_plugin_notes">回合备注</string>
+    <string name="native_plugin_panels">面板</string>
+    <string name="native_plugins_empty">没有可配置的原生插件</string>
+</resources>

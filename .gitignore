@@ -1,0 +1,39 @@
+# references cloned for study (not part of the project)
+.refs/
+# runtime build cache and outputs (large, reproducible via data/engine/runtime/build-runtime.sh)
+data/engine/runtime/.cache/
+data/engine/runtime/out*/
+data/engine/runtime/.work/
+data/engine/runtime/.build-*.log
+app/build/
+# local signing/secrets and native build caches (never commit)
+local.properties
+key.properties
+**/*.keystore
+**/*.jks
+.cxx/
+app/.cxx/
+
+# build outputs never belong in git
+.gradle/
+.kotlin/
+**/build/
+*.apk
+*.aab
+
+# local scratch (agent notes, review packets)
+.harness-tmp*/
+.claude/
+# Python bytecode
+**/__pycache__/
+*.pyc
+
+# Local release exports
+/dist/
+
+
+# Downloaded host release artifact
+.host/
+
+# Local agent tooling
+.agents/
