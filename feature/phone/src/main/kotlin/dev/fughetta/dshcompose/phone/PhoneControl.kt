@@ -1,0 +1,625 @@
+package dev.fughetta.dshcompose.phone
+
+import android.app.Application
+import android.app.KeyguardManager
+import android.app.NotificationManager
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.net.Uri
+import android.os.Build
+import android.os.Handler
+import android.os.Looper
+import android.os.PowerManager
+import android.provider.Settings
+import dev.fughetta.dshcompose.core.designsystem.R as CoreDesignsystemR
+import dev.fughetta.dshcompose.core.phone.R as PhoneR
+import dev.fughetta.dshcompose.di.localPreferences
+import dev.fughetta.dshcompose.domain.phone.PhonePolicies
+import dev.fughetta.dshcompose.domain.phone.PhoneScreen
+import dev.fughetta.dshcompose.feature.phone.R
+import dev.fughetta.dshcompose.i18n.AppStrings
+import dev.fughetta.dshcompose.phone.background.BackgroundControl
+import dev.fughetta.dshcompose.platform.applicationHost
+import java.io.File
+import java.time.ZoneId
+import java.util.concurrent.CopyOnWriteArraySet
+import java.util.concurrent.Executors
+import java.util.concurrent.ScheduledFuture
+import java.util.concurrent.TimeUnit
+
+/**
+ * Process-wide owner of phone control on Android: the master switch and app lists (prefs), the
+ * bridge's lifecycle around the engine (started before DSH launches, stopped when it exits, never
+ * in safe mode), the [PhoneEnv] the core runs against, the task's status line, the screen-off stop,
+ * and the status pushed to the app. [dev.fughetta.dshcompose.engine.runtime.RuntimeController]
+ * calls [prepareLaunch] / [launched] / [onEngineReady] / [onEngineStopped].
+ */
+class PhoneControl private constructor(internal val app: Context) : PhoneControlListener {
+    internal val prefs = app.localPreferences(PREFS)
+    private val device by lazy {
+        val id =
+            prefs.getString("deviceId", null)
+                ?: java.util.UUID.randomUUID().toString().also {
+                    prefs.edit().putString("deviceId", it).apply()
+                }
+        PhoneDevice(id, "${Build.MANUFACTURER} ${Build.MODEL}".trim())
+    }
+    internal val main = Handler(Looper.getMainLooper())
+    private val nm = app.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    internal val ticker = Executors.newSingleThreadScheduledExecutor { r ->
+        Thread(r, "dsh-phone-status").apply { isDaemon = true }
+    }
+
+    internal var tickFuture: ScheduledFuture<*>? = null
+
+    override val tasks = PhoneTasks()
+    val log = ActionLog()
+    val system = SystemActions(app)
+    private val localizedUi = PhoneUiText { key, args ->
+        when (key) {
+            "phone_log_clipboard_write" ->
+                return@PhoneUiText AppStrings.plural(
+                    app,
+                    R.plurals.phone_log_clipboard_write,
+                    args[0] as Int,
+                    *args.toTypedArray(),
+                )
+            "phone_log_type" ->
+                return@PhoneUiText AppStrings.plural(
+                    app,
+                    R.plurals.phone_log_type,
+                    args[2] as Int,
+                    *args.toTypedArray(),
+                )
+        }
+        val id =
+            when (key) {
+                "phone_waived_status" -> PhoneR.string.phone_waived_status
+                "phone_move_background" -> R.string.phone_move_background
+                "phone_opening_background" -> R.string.phone_opening_background
+                "phone_reading_background" -> R.string.phone_reading_background
+                "phone_reading_screen" -> R.string.phone_reading_screen
+                "phone_reading_list" -> R.string.phone_reading_list
+                "phone_acting" -> PhoneR.string.phone_acting
+                "phone_status_tap" -> R.string.phone_status_tap
+                "phone_status_long_tap" -> R.string.phone_status_long_tap
+                "phone_status_type" -> R.string.phone_status_type
+                "phone_status_scroll" -> R.string.phone_status_scroll
+                "phone_status_tap_xy" -> R.string.phone_status_tap_xy
+                "phone_status_key" -> R.string.phone_status_key
+                "phone_status_press" -> R.string.phone_status_press
+                "phone_key_back" -> R.string.phone_key_back
+                "phone_key_home" -> R.string.phone_key_home
+                "phone_key_recents" -> R.string.phone_key_recents
+                "phone_key_notifications" -> R.string.phone_key_notifications
+                "phone_confirm_first_app" -> R.string.phone_confirm_first_app
+                "phone_confirm_element" -> R.string.phone_confirm_element
+                "phone_confirm_tap" -> R.string.phone_confirm_tap
+                "phone_confirm_long_tap" -> R.string.phone_confirm_long_tap
+                "phone_confirm_type" -> R.string.phone_confirm_type
+                "phone_confirm_submit" -> R.string.phone_confirm_submit
+                "phone_confirm_tap_xy" -> R.string.phone_confirm_tap_xy
+                "phone_confirm_scroll" -> R.string.phone_confirm_scroll
+                "phone_confirm_key" -> R.string.phone_confirm_key
+                "phone_current_app" -> R.string.phone_current_app
+                "phone_log_apps" -> R.string.phone_log_apps
+                "phone_log_apps_filtered" -> R.string.phone_log_apps_filtered
+                "phone_log_open_url" -> R.string.phone_log_open_url
+                "phone_log_open_url_scheme" -> R.string.phone_log_open_url_scheme
+                "phone_log_open_app" -> R.string.phone_log_open_app
+                "phone_log_open_background" -> R.string.phone_log_open_background
+                "phone_log_notify" -> R.string.phone_log_notify
+                "phone_log_clipboard_read" -> R.string.phone_log_clipboard_read
+                "phone_log_background_read" -> R.string.phone_log_background_read
+                "phone_log_screen_read" -> R.string.phone_log_screen_read
+                "phone_log_collect" -> R.string.phone_log_collect
+                "phone_log_scroll" -> R.string.phone_log_scroll
+                "phone_log_tap_xy" -> R.string.phone_log_tap_xy
+                "phone_log_key" -> R.string.phone_log_key
+                "phone_log_handoff" -> R.string.phone_log_handoff
+                "phone_log_long_tap" -> R.string.phone_log_long_tap
+                "phone_log_tap" -> R.string.phone_log_tap
+                "phone_log_submit" -> R.string.phone_log_submit
+                "phone_log_type_secret" -> R.string.phone_log_type_secret
+                "phone_role_button" -> R.string.phone_role_button
+                "phone_role_input" -> R.string.phone_role_input
+                "phone_role_list" -> R.string.phone_role_list
+                "phone_role_switch" -> R.string.phone_role_switch
+                "phone_role_checkbox" -> R.string.phone_role_checkbox
+                "phone_role_radio" -> R.string.phone_role_radio
+                "phone_role_slider" -> R.string.phone_role_slider
+                "phone_role_dropdown" -> R.string.phone_role_dropdown
+                "phone_role_link" -> R.string.phone_role_link
+                "phone_role_tab" -> R.string.phone_role_tab
+                "phone_role_image" -> R.string.phone_role_image
+                "phone_role_text" -> R.string.phone_role_text
+                else -> null
+            }
+        id?.let { AppStrings.get(app, it, *args.toTypedArray()) }
+    }
+
+    fun uiText(): PhoneUiText = localizedUi
+
+    val environment =
+        PhoneEnv(
+            enabled = ::enabled,
+            policies = ::policies,
+            isLocked = ::isLocked,
+            gate = ::gate,
+            driver = ::driver,
+            a11yState = ::a11yState,
+            backgroundUnavailable = ::backgroundUnavailable,
+            system = ::system,
+            zone = ::zone,
+            notifyFix = {},
+            uiText = ::uiText,
+            device = { device() },
+            installApk = ::installApk,
+            beforeHandoff = ::beforeHandoff,
+        )
+    val core = PhoneCore(environment, tasks, log)
+    val notificationGate = NotificationGate(app) { setStatusLine(it) }
+    val prompts = PhonePrompts(app, tasks, ::isEnabled, ::isLocked, notificationGate, ::reopen)
+    private val server = McpServer(PhoneToolCatalog.listJson(), core::call, SERVER_VERSION)
+    internal val bridge = PhoneBridge(server) { line -> logger(line) }
+
+    @Volatile internal var logger: (String) -> Unit = {}
+    @Volatile internal var rootfs: File? = null
+    @Volatile private var policiesCache: PhonePolicies? = null
+    @Volatile internal var statusLine: String? = null
+    @Volatile internal var lastStatus: Map<String, Any?>? = null
+    private var screenReceiver: BroadcastReceiver? = null
+    internal val sinks = CopyOnWriteArraySet<(Map<String, Any?>) -> Unit>()
+    val background: BackgroundControl = BackgroundControl.get(app)
+
+    init {
+        PhoneRegistry.notificationGate = notificationGate.gate
+        PhoneRegistry.promptGate = prompts.gate
+        PhoneRegistry.controlListener = this
+        PhoneRegistry.unlocks = { policies().unlocks }
+        background.onStatusChanged = { emitStatus() }
+        (app as? Application)?.let { AppVisibility.register(it) }
+        tasks.addListener { onTask(it) }
+    }
+
+    // ── Switch and app lists ────────────────────────────────────────────────────────
+
+    override fun isEnabled(): Boolean = switchedOn(app)
+
+    /**
+     * Off takes effect at once (bridge closed, task stopped); on needs an engine restart (the UI
+     * does it).
+     */
+    fun setEnabled(enabled: Boolean): Boolean {
+        prefs.edit().putBoolean(K_ENABLED, enabled).apply()
+        if (!enabled) {
+            // l10n:keep agent stop reason
+            tasks.stop("手机操控已关闭")
+            stopBridge()
+        } else {
+            tasks.clearStop()
+        }
+        updateTicker()
+        emitStatus()
+        return true
+    }
+
+    fun policies(): PhonePolicies =
+        policiesCache
+            ?: run {
+                val stored = prefs.getString(K_POLICIES, null)
+                val p =
+                    try {
+                        PhonePolicies.fromMap(stored?.let { Json.parse(it) as? Map<*, *> })
+                    } catch (_: Exception) {
+                        PhonePolicies()
+                    }
+                policiesCache = p
+                p
+            }
+
+    @Synchronized
+    fun setPolicies(map: Map<*, *>?): Boolean {
+        val old = policies()
+        val p = PhonePolicies.fromMap(map, base = old)
+        val widening =
+            !old.unlocks.systemPages && p.unlocks.systemPages ||
+                !old.unlocks.secretFields && p.unlocks.secretFields ||
+                !old.unlocks.ownApp && p.unlocks.ownApp
+        fun save() {
+            prefs.edit().putString(K_POLICIES, Json.write(p.toMap())).apply()
+            policiesCache = p
+        }
+        return if (widening) tasks.runIfNotLive(::save)
+        else {
+            save()
+            true
+        }
+    }
+
+    /** `getPolicies`: the lists, a label for every listed package, and the shipped defaults. */
+    fun policiesMap(): Map<String, Any?> {
+        val p = policies()
+        val labels = LinkedHashMap<String, String>()
+        for (pkg in
+            (p.denyPackages +
+                    p.confirmEveryWritePackages +
+                    PhonePolicies().denyPackages +
+                    PhonePolicies().confirmEveryWritePackages)
+                .distinct()) {
+            label(pkg)?.let { labels[pkg] = it }
+        }
+        return p.toMap() + mapOf("labels" to labels, "defaults" to PhonePolicies().toMap())
+    }
+
+    private fun label(pkg: String): String? =
+        try {
+            app.packageManager
+                .getApplicationLabel(app.packageManager.getApplicationInfo(pkg, 0))
+                .toString()
+        } catch (_: Exception) {
+            null
+        }
+
+    // ── Engine lifecycle (RuntimeController's worker thread) ───────────────────────
+
+    /**
+     * Before DSH launches: with the switch on and not in safe mode, writes the guest files, starts
+     * the bridge and returns true (the launch then adds the `--patch` overlay). Otherwise makes
+     * sure nothing is listening and returns false: DSH mounts no phone tools at all.
+     */
+    fun prepareLaunch(rootfs: File, log: (String) -> Unit): Boolean {
+        logger = log
+        tasks.invalidateOwners()
+        stopBridge()
+        this.rootfs = rootfs
+        if (!isEnabled()) {
+            PhoneGuest.clearConfig(rootfs)
+            emitStatus()
+            return false
+        }
+        return try {
+            PhoneGuest.writeFiles(rootfs)
+            val ep = bridge.start(withTcp = prefs.getBoolean(K_TCP_FALLBACK, false))
+            PhoneGuest.writeConfig(rootfs, ep)
+            registerScreenOff()
+            tasks.clearStop()
+            emitStatus()
+            true
+        } catch (e: Exception) {
+            log(
+                "[dsh-app] phone control: setup failed (${e.message}); starting without phone tools",
+            )
+            stopBridge()
+            false
+        }
+    }
+
+    /**
+     * After the launch command was built: [mounted] false means this runtime's template had no `dsh
+     * compose` to add the overlay to.
+     */
+    fun launched(mounted: Boolean) {
+        if (mounted) return
+        logger(
+            "[dsh-app] phone control: this runtime's launch command has no `dsh compose` to add the phone overlay to; phone tools are off",
+        )
+        stopBridge()
+    }
+
+    /**
+     * DSH printed its login line, so every plugin (including the MCP client's first connection) has
+     * loaded. No authenticated connection 5 s later means the guest couldn't reach the abstract
+     * socket: open the loopback fallback now (the client's reconnect re-reads bridge.json) and keep
+     * it on for later launches.
+     */
+    fun onEngineReady() {
+        // Grace period: the client's first connection normally lands before the login line anyway.
+        ticker.schedule({ checkReached() }, 5, TimeUnit.SECONDS)
+    }
+
+    fun onEngineStopped() {
+        tasks.invalidateOwners()
+        stopBridge()
+        core.worker.retire()
+        tasks.endTask()
+        emitStatus()
+    }
+
+    private fun stopBridge() {
+        bridge.stop()
+        rootfs?.let { PhoneGuest.clearConfig(it) }
+        unregisterScreenOff()
+    }
+
+    val bridgeListening: Boolean
+        get() = bridge.listening
+
+    // ── Task ────────────────────────────────────────────────────────────────────────
+
+    fun stopTask(reason: String): Boolean {
+        tasks.stop(reason)
+        return true
+    }
+
+    /**
+     * The app (`finishTask`): the turn that drove the phone ended. Ends the task — a stop's hold
+     * too — and closes the overlay, ball and cards included. False when there was nothing to end,
+     * or a phone call still runs, or the requested task changed. Any thread.
+     */
+    override fun finishTask(expectedTaskId: Long?): Boolean {
+        val taskId = expectedTaskId ?: tasks.snapshot().id
+        return tasks.finish(taskId)
+    }
+
+    fun finishTaskScope(expectedTaskId: Long): PhoneTasks.Owner? = tasks.finishScope(expectedTaskId)
+
+    /**
+     * Brings the app forward on [sessionId] (just the app when null) after a finished task. Started
+     * from the accessibility service when bound. This is a best-effort start under Android's
+     * background-start restrictions, not a guarantee. False when start threw; the caller must
+     * separately observe its ActivityAware host resumed (some vendors block silently).
+     */
+    override fun reopen(sessionId: String?, host: String?): Boolean {
+        val intent =
+            if (sessionId != null) {
+                    app.applicationHost().chatIntent(app, sessionId, host)
+                } else {
+                    app.applicationHost()
+                        .appIntent(app)
+                        .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                }
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        val from: Context = app
+        return try {
+            from.startActivity(intent)
+            true
+        } catch (_: Exception) {
+            false
+        }
+    }
+
+    fun liveTask(): LiveTask? {
+        val s = tasks.snapshot()
+        if (!s.active) return null
+        return LiveTask(s.id, statusLine, s.app, s.paused)
+    }
+
+    data class LiveTask(val id: Long, val line: String?, val app: String?, val paused: Boolean)
+
+    /** The engine notification's text while a task runs (with a 停止操作 button); null otherwise. */
+    fun foregroundLine(): String? {
+        val s = tasks.snapshot()
+        if (!s.active) return null
+        return statusLine
+            ?: AppStrings.get(app, CoreDesignsystemR.string.phone_running) +
+                (s.app?.let { " · $it" } ?: "")
+    }
+
+    private fun registerScreenOff() {
+        if (screenReceiver != null) return
+        val r =
+            object : BroadcastReceiver() {
+                override fun onReceive(context: Context, intent: Intent) {
+                    if (intent.action != Intent.ACTION_SCREEN_OFF) return
+                    // l10n:keep agent stop reason
+                    onStopRequested("熄屏")
+                    if (PhoneRegistry.backgroundDriver != null)
+                        runCatching { background.interrupt() }
+                }
+            }
+        screenReceiver = r
+        runCatching { app.registerReceiver(r, IntentFilter(Intent.ACTION_SCREEN_OFF)) }
+    }
+
+    private fun unregisterScreenOff() {
+        screenReceiver?.let { runCatching { app.unregisterReceiver(it) } }
+        screenReceiver = null
+    }
+
+    // ── Things the plugin asks for ──────────────────────────────────────────────────
+
+    fun appDetailsIntent(): Intent =
+        Intent(
+                Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                Uri.parse("package:${app.packageName}"),
+            )
+            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
+    /** Reads the existing immutable gate snapshot without refreshing phone state. */
+    fun backgroundProbeDiagnostics(): Map<String, Any?> = background.inputProbeDiagnostics()
+
+    fun status(): Map<String, Any?> =
+        linkedMapOf(
+            "enabled" to isEnabled(),
+            "bridgeListening" to bridge.listening,
+            "notifications" to nm.areNotificationsEnabled(),
+            "confirmationNotifications" to notificationGate.available(),
+            "background" to backgroundStatus(),
+            "task" to tasks.snapshot().toMap(),
+            "device" to
+                linkedMapOf(
+                    "manufacturer" to Build.MANUFACTURER,
+                    "sdkInt" to Build.VERSION.SDK_INT,
+                    "sideloaded" to sideloaded(),
+                ),
+        )
+
+    /**
+     * Installed from a browser or file manager rather than a store (Android 13+ restricted settings
+     * apply).
+     */
+    private fun sideloaded(): Boolean? =
+        try {
+            val installer =
+                if (Build.VERSION.SDK_INT >= 30) {
+                    app.packageManager.getInstallSourceInfo(app.packageName).installingPackageName
+                } else {
+                    @Suppress("DEPRECATION")
+                    app.packageManager.getInstallerPackageName(app.packageName)
+                }
+            installer == null || installer !in STORES
+        } catch (_: Exception) {
+            null
+        }
+
+    fun addSink(sink: (Map<String, Any?>) -> Unit) {
+        sinks += sink
+        updateTicker()
+        ticker.execute { pushIfChanged(force = true) }
+    }
+
+    fun removeSink(sink: (Map<String, Any?>) -> Unit) {
+        sinks -= sink
+        updateTicker()
+    }
+
+    /** Recomputes the status off the main thread and pushes it if it changed. */
+    fun emitStatus() {
+        if (sinks.isEmpty()) return
+        ticker.execute { pushIfChanged(force = false) }
+    }
+
+    override fun onPauseChanged(paused: Boolean) = tasks.setPaused(paused)
+
+    override fun onStopRequested(reason: String) {
+        // The service also reports screen off / service gone while idle: only a running task stops.
+        if (tasks.snapshot().active) tasks.stop(reason) else tasks.invalidateOwners()
+    }
+
+    override fun onInterject(text: String) = tasks.interject(text)
+
+    override fun onAccessibilityChanged(connected: Boolean) = emitStatus()
+
+    // ── PhoneEnv ────────────────────────────────────────────────────────────────────
+
+    fun enabled(): Boolean = isEnabled()
+
+    fun isLocked(): Boolean {
+        val km = app.getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
+        val power = app.getSystemService(Context.POWER_SERVICE) as PowerManager
+        return km.isKeyguardLocked || !power.isInteractive
+    }
+
+    fun gate(): UserGate = prompts.gate
+
+    /**
+     * The background driver is registered per task: bring it up on first use (worker thread; may
+     * connect). Main-screen control is not included in this app assembly.
+     */
+    fun driver(screen: PhoneScreen): PhoneDriver? {
+        if (screen != PhoneScreen.BACKGROUND) return PhoneRegistry.driver(screen)
+        return if (runCatching { background.beginTask(tasks.snapshot().id) }.getOrDefault(false))
+            PhoneRegistry.backgroundDriver
+        else null
+    }
+
+    fun beforeHandoff(screen: PhoneScreen): String? {
+        if (screen != PhoneScreen.BACKGROUND || PhoneRegistry.backgroundDriver == null) return null
+        runCatching { background.endTask() }
+        // l10n:keep agent stop reason
+        return "后台屏已释放，App 回到了主屏，用户在主屏上操作。当前未启用主屏控制，请等待用户完成操作。"
+    }
+
+    fun a11yState(): A11yState = A11yState.UNAVAILABLE
+
+    fun backgroundUnavailable(): String {
+        val reason = (backgroundStatus()["reason"] as? String)?.let { "（$it）" } ?: ""
+        // l10n:keep agent stop reason
+        return "不打扰模式（后台屏）用不了$reason。要用后台屏请用户到 设置 → 手机操控 → 不打扰模式 开通。"
+    }
+
+    fun system(): SystemApi = system.api
+
+    fun device(): PhoneDevice = device
+
+    private val apkRequests by lazy { ApkInstallRequests(app, tasks, prompts, ::isLocked, device) }
+    private val remoteApks =
+        java.util.concurrent.ConcurrentHashMap<
+            String,
+            Pair<java.io.File, dev.fughetta.dshcompose.update.RemoteInstallRecord>,
+        >()
+
+    fun installRemoteApk(
+        file: java.io.File,
+        record: dev.fughetta.dshcompose.update.RemoteInstallRecord,
+    ): ToolOutput {
+        remoteApks[file.absolutePath] = file to record
+        return try {
+            core.call(
+                PhoneToolCatalog.INSTALL_APK,
+                mapOf("path" to file.absolutePath, "deviceId" to device.id),
+            )
+        } finally {
+            remoteApks.remove(file.absolutePath)
+        }
+    }
+
+    fun installApk(path: String, deviceId: String, scope: SerialWorker.Scope): ToolOutput {
+        val remote = remoteApks[path]
+        return apkRequests.install(path, deviceId, scope, remote?.first, remote?.second)
+    }
+
+    fun zone(): ZoneId = ZoneId.systemDefault()
+
+    override val visible: Boolean
+        get() = AppVisibility.visible
+
+    override val liveTaskApp: String?
+        get() = liveTask()?.app
+
+    override fun openLink(url: String) {
+        app.startActivity(
+            app.applicationHost().linkIntent(app, url).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
+        )
+    }
+
+    companion object {
+        const val SERVER_VERSION = "1"
+        private const val PREFS = "dsh_phone"
+        private const val K_ENABLED = "enabled"
+        private const val K_POLICIES = "policies"
+        internal const val K_TCP_FALLBACK = "tcpFallback"
+
+        /** Installer packages of app stores; anything else (or none) counts as sideloaded. */
+        private val STORES =
+            setOf(
+                "com.android.vending",
+                "com.xiaomi.market",
+                "com.heytap.market",
+                "com.oppo.market",
+                "com.bbk.appstore",
+                "com.huawei.appmarket",
+                "com.hihonor.appmarket",
+                "com.tencent.android.qqdownloader",
+                "com.baidu.appsearch",
+                "com.wandoujia.phoenix2",
+                "com.qihoo.appstore",
+                "com.sec.android.app.samsungapps",
+                "com.meizu.mstore",
+                "com.smartisanos.appstore",
+                "zte.com.market",
+                "com.lenovo.leos.appstore",
+                "com.coolapk.market",
+            )
+
+        @Volatile private var instance: PhoneControl? = null
+
+        fun get(context: Context): PhoneControl =
+            instance
+                ?: synchronized(this) {
+                    instance ?: PhoneControl(context.applicationContext).also { instance = it }
+                }
+
+        /**
+         * Without creating it (EngineService builds notifications before anything else may exist).
+         */
+        fun peek(): PhoneControl? = instance
+
+        /** The master switch 「手机操控」, without creating the controller. */
+        fun switchedOn(context: Context): Boolean =
+            context.localPreferences(PREFS).getBoolean(K_ENABLED, false)
+    }
+}

@@ -2,7 +2,7 @@
 
 本文件集中列出 dsh-compose 复制或改写进源码的第三方代码与素材，以及随 App 一起分发的字体、原生库和 Linux 运行时组件。源文件头那一行 `Portions derived from …` 指向这里。
 
-- 原生 App 的「设置 › 关于 › 开源许可」页读取 APK 内的声明与许可证；Gradle 将本文件复制为 `licenses/THIRD_PARTY_NOTICES.md`，将根目录 `LICENSE.md` 复制并重命名为 `licenses/LICENSE`；字体许可来自 `app/src/main/assets/fonts/OFL.txt`。
+- 原生 App 的「设置 › 关于 › 开源许可」页读取 APK 内的声明与许可证；Gradle 将本文件复制为 `licenses/THIRD_PARTY_NOTICES.md`，将根目录 `LICENSE.md` 复制并重命名为 `licenses/LICENSE`；字体许可来自 `core/designsystem/src/main/assets/fonts/OFL.txt`。
 - Gradle / Maven 依赖按各模块的 `build.gradle.kts` 核对直接与传递依赖，这里不逐包重复；发行前仍须核验实际 APK 的许可资产，不能仅凭依赖声明认定已收录。
 - 许可证全文见文末「许可证全文」。
 - 本项目软件的许可见 `LICENSE.md`（GPL-3.0）。品牌标识和吉祥物美术不属于第三方，本文件不授予其使用许可。
@@ -18,7 +18,7 @@
 | 许可 | 经作者许可使用 |
 | 用途 | 手机操控：无障碍读屏与操作、控制浮层，以及「不打扰模式」的特权虚拟屏 |
 
-上游路径前缀为 `android/app/src/main/kotlin/app/xiangyue/phase/`；本仓库路径前缀为 `app/src/main/kotlin/dev/fughetta/dshcompose/phone/`。
+上游路径前缀为 `android/app/src/main/kotlin/app/xiangyue/phase/`；本仓库的 `a11y/` 文件位于 `feature/accessibility/src/main/kotlin/dev/fughetta/dshcompose/phone/`，`background/` 文件位于 `feature/phone/src/main/kotlin/dev/fughetta/dshcompose/phone/`。
 
 | 本仓库文件 | 上游来源 |
 |---|---|
@@ -31,7 +31,7 @@
 | `background/PrivilegedDisplayEntry.kt` | `shizuku/ShizukuDeviceService.kt` |
 | `background/PrivilegedProtocol.kt` | 失败原因码集合 |
 | `background/ShizukuStarter.kt` | `shizuku/ShizukuConnection.kt` |
-| `app/src/main/res/xml/phone_accessibility_service.xml` | `accessibility_service.xml` |
+| `feature/accessibility/src/main/res/xml/phone_accessibility_service.xml` | `accessibility_service.xml` |
 
 声明原文：
 
@@ -63,7 +63,7 @@ Flutter 版本中由它改写的聊天界面、通用组件、抽屉外壳与主
 
 | 本仓库文件 | 上游来源 | 用途 |
 |---|---|---|
-| `domain/src/main/kotlin/dev/fughetta/dshcompose/domain/sessions/search/SessionSearch.kt`、`data/protocol/src/main/kotlin/dev/fughetta/dshcompose/protocol/SessionSearch.kt`、`app/src/main/kotlin/dev/fughetta/dshcompose/ui/search/SessionSearchViewModel.kt` | `@deepseek-ai/dsh-client-ui-workspace`（`deriveSearchResults`） | 对话搜索结果合并 |
+| `domain/src/main/kotlin/dev/fughetta/dshcompose/domain/sessions/search/SessionSearch.kt`、`data/protocol/src/main/kotlin/dev/fughetta/dshcompose/protocol/SessionSearch.kt`、`feature/chat/src/main/kotlin/dev/fughetta/dshcompose/ui/search/SessionSearchViewModel.kt` | `@deepseek-ai/dsh-client-ui-workspace`（`deriveSearchResults`） | 对话搜索结果合并 |
 | `domain/src/main/kotlin/dev/fughetta/dshcompose/domain/schedules/ScheduleTiming.kt` | `@deepseek-ai/dsh-client-ui-schedule`（`task-cron.js`） | 定时任务的 cron 解析与中文描述 |
 | `data/protocol/src/main/kotlin/dev/fughetta/dshcompose/protocol/WorkspaceBinaryApi.kt` | `@deepseek-ai/dsh-client-connection`（`parseBinaryResponse`） | 二进制结果解码：有界 multipart 附件解析与文件字节窗口 |
 | 随 APK 分发的 DSH Compose Host 引擎 | 独立仓库 `tsurumi-yizhou/dsh-compose-host` 的 `engine/packages/`，源自 DeepSeek Harness `dsh-v0.2.2-rc.1` | 非官方维护的引擎实现；产物保留各包的 MIT LICENSE |
@@ -83,8 +83,8 @@ Flutter 版本中由它改写的聊天界面、通用组件、抽屉外壳与主
 
 | 本仓库文件 | 上游来源 |
 |---|---|
-| `app/src/main/kotlin/dev/fughetta/dshcompose/ui/dynamicui/DynamicUiModel.kt` | `ds-bot/src/shared/views.js`（`normalizeView`、校验与上限、`viewSummary`） |
-| `app/src/main/kotlin/dev/fughetta/dshcompose/ui/dynamicui/DynamicUiReply.kt` | `ds-bot/src/shared/views.js`（`validateOptions`） |
+| `feature/chat/src/main/kotlin/dev/fughetta/dshcompose/ui/dynamicui/DynamicUiModel.kt` | `ds-bot/src/shared/views.js`（`normalizeView`、校验与上限、`viewSummary`） |
+| `feature/chat/src/main/kotlin/dev/fughetta/dshcompose/ui/dynamicui/DynamicUiReply.kt` | `ds-bot/src/shared/views.js`（`validateOptions`） |
 | `data/engine/src/main/kotlin/dev/fughetta/dshcompose/engine/runtime/GuestSetup.kt` | `ds-bot/src/host/tools.js`、`prompt.js`（`show_view` 说明与提示规则） |
 
 DS Bot 的 NOTICE 原文附在文末。
@@ -97,7 +97,7 @@ DS Bot 的 NOTICE 原文附在文末。
 | 版权人 | Copyright (c) 2026 qiannianhuanxiang |
 | 许可 | MIT |
 | 用途 | 不打扰模式特权进程的 `app_process` 入口 |
-| 文件 | `app/src/main/kotlin/dev/fughetta/dshcompose/phone/background/PrivilegedDisplayEntry.kt` |
+| 文件 | `feature/phone/src/main/kotlin/dev/fughetta/dshcompose/phone/background/PrivilegedDisplayEntry.kt` |
 
 ## 二、素材
 
@@ -131,7 +131,7 @@ DS Bot 的 NOTICE 原文附在文末。
 | 版权人 | Discourse（gemspec 作者 Joffrey Jaffeux） |
 | 许可 | MIT（见其 `discourse-emojis.gemspec`） |
 | 用途 | 论坛表情的名称与别名表，只用数据，不含图片 |
-| 文件 | `app/src/main/resources/forum/emoji.txt` |
+| 文件 | `feature/chat/src/main/resources/forum/emoji.txt` |
 
 ### JetBrains Mono（SIL OFL 1.1）
 
@@ -139,9 +139,9 @@ DS Bot 的 NOTICE 原文附在文末。
 |---|---|
 | 项目 | JetBrains Mono，https://github.com/JetBrains/JetBrainsMono |
 | 版权人 | Copyright 2020 The JetBrains Mono Project Authors |
-| 许可 | SIL Open Font License 1.1，全文见 `app/src/main/assets/fonts/OFL.txt` |
+| 许可 | SIL Open Font License 1.1，全文见 `core/designsystem/src/main/assets/fonts/OFL.txt` |
 | 用途 | 代码字体，随 App 分发，也注入网页版 |
-| 文件 | `app/src/main/assets/fonts/JetBrainsMono-*.ttf` |
+| 文件 | `core/designsystem/src/main/assets/fonts/JetBrainsMono-*.ttf` |
 
 ## 三、随 App 分发的原生库
 
@@ -155,7 +155,7 @@ DS Bot 的 NOTICE 原文附在文末。
 | Coil（core、Compose core、SVG） | 3.6.3 | Apache-2.0 | Coil Contributors | 回复图片异步加载、采样解码与内存缓存；https://github.com/coil-kt/coil |
 | AndroidSVG（Coil SVG 的传递依赖） | 1.4 | Apache-2.0 | Paul LeBeau / AndroidSVG contributors | SVG 解码；https://github.com/BigBadaboom/androidsvg |
 | Okio（Coil 的传递依赖） | 3.18.1 | Apache-2.0 | Square, Inc. | 图片文件源与资源关闭；https://github.com/square/okio |
-| highlight.js | 11.12.0 | BSD-3-Clause | Copyright (c) 2006, Ivan Sagalaev | 原生代码块词法标记；上游源码、别名与词法桥在 `app/src/main/syntax/`，由 `:app:generateSyntax` 合并到 `app/build/generated/syntaxResources/syntax/highlight.js`；https://github.com/highlightjs/highlight.js |
+| highlight.js | 11.12.0 | BSD-3-Clause | Copyright (c) 2006, Ivan Sagalaev | 原生代码块词法标记；上游源码、别名与词法桥在 `feature/chat/src/main/syntax/`，由 `:feature:chat:generateSyntax` 合并到 `feature/chat/build/generated/syntaxResources/syntax/highlight.js`；https://github.com/highlightjs/highlight.js |
 | quickjs-kt | 1.0.18 | Apache-2.0 | Copyright 2024 dokar3 | Kotlin 异步词法解析运行时，随包 `libquickjs.so`；https://github.com/dokar3/quickjs-kt |
 | QuickJS | quickjs-kt 1.0.18 随附源码 | MIT | Copyright (c) 2017-2021 Fabrice Bellard；Copyright (c) 2017-2021 Charlie Gordon | 仅运行应用自带词法器；https://github.com/bellard/quickjs |
 | c-vector | quickjs-kt 1.0.18 随附源码 | MIT | Copyright (c) 2015 Evan Teran | QuickJS JNI 绑定使用的向量实现；https://github.com/eteran/c-vector |
@@ -714,7 +714,7 @@ CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 ### 其他许可证
 
-- SIL Open Font License 1.1：`app/src/main/assets/fonts/OFL.txt`
+- SIL Open Font License 1.1：`core/designsystem/src/main/assets/fonts/OFL.txt`
 - GNU LGPL-3.0（spake2-android、libtalloc）：https://www.gnu.org/licenses/lgpl-3.0.txt ；配套 GNU GPL-3.0 全文：https://www.gnu.org/licenses/gpl-3.0.txt 。当前 App 许可页显示本声明、项目 GPL-3.0 许可证和字体 OFL；LGPL-3.0 全文通过上述链接提供。
 - GNU GPL-2.0（proot）：随 APK 附带于 `assets/runtime/licenses/proot-COPYING.txt`
 

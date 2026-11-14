@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="phone_install_new">Install this app?\n\n%1$s\nPackage: %2$s\nVersion: %3$s (%4$d)\nNew installation\nTarget device: %5$s\nDevice ID: %6$s\n\nOnly allow apps you trust. Phone input stays paused until installation ends. You will also confirm in the Android installer.</string>
+    <string name="phone_install_update">Update this app?\n\n%1$s\nPackage: %2$s\nVersion: %3$s (%4$d)\nReplaces the installed app\nTarget device: %5$s\nDevice ID: %6$s\n\nOnly allow apps you trust. Phone input stays paused until installation ends. You will also confirm in the Android installer.</string>
+</resources>

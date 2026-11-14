@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ask_ai">Ask AI</string>
+    <string name="risk_dont_show_again">Don’t show again</string>
+    <string name="risk_ask_ai">✦ Not sure? Ask AI</string>
+    <string name="risk_root_title">Give DSH Compose root access?</string>
+    <string name="risk_root_action">Use root</string>
+</resources>

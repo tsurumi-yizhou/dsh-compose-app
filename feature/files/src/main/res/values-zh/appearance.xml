@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="composer_no_mentions">没有匹配的引用对象</string>
+</resources>

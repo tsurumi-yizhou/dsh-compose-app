@@ -10,13 +10,13 @@ import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import dev.fughetta.dshcompose.R as UiR
 import dev.fughetta.dshcompose.appearance.*
 import dev.fughetta.dshcompose.appearance.handleAppearance
 import dev.fughetta.dshcompose.attachments.importShares
 import dev.fughetta.dshcompose.connection.closeConnectionScreens
 import dev.fughetta.dshcompose.connection.handleHostActions
 import dev.fughetta.dshcompose.connection.status
+import dev.fughetta.dshcompose.core.designsystem.R as CoreDesignsystemR
 import dev.fughetta.dshcompose.di.createAppearanceController
 import dev.fughetta.dshcompose.di.createBackgroundNet
 import dev.fughetta.dshcompose.di.createComposerFiles
@@ -151,6 +151,9 @@ class AppViewModel(internal val app: Application) : AndroidViewModel(app) {
     internal val mutableState =
         kotlinx.coroutines.flow.MutableStateFlow(
             AppState(
+                composerActions = builtInComposerActions,
+                messageRenderers = builtInMessageRenderers,
+                featurePages = builtInPages,
                 contributions =
                     FeatureContributions(
                         featureModules.state.value.contributions
@@ -201,7 +204,7 @@ class AppViewModel(internal val app: Application) : AndroidViewModel(app) {
                     it.copy(
                         error =
                             getApplication<Application>()
-                                .getString(UiR.string.markdown_link_unavailable),
+                                .getString(CoreDesignsystemR.string.markdown_link_unavailable),
                     )
                 }
             },
@@ -372,7 +375,7 @@ class AppViewModel(internal val app: Application) : AndroidViewModel(app) {
                     AppStrings.get(app, it)
                 }
             },
-            failed = { AppStrings.get(app, UiR.string.commands_unavailable) },
+            failed = { AppStrings.get(app, R.string.commands_unavailable) },
         )
     val commandPalette = commands.state
     internal val sessionArchives = createSessionArchives()
@@ -522,7 +525,9 @@ class AppViewModel(internal val app: Application) : AndroidViewModel(app) {
     fun islandExternalFailed() {
         mutableState.update {
             it.copy(
-                error = getApplication<Application>().getString(UiR.string.markdown_link_failed),
+                error =
+                    getApplication<Application>()
+                        .getString(CoreDesignsystemR.string.markdown_link_failed),
             )
         }
     }

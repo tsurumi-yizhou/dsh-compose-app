@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ask_ai">问 AI</string>
+    <string name="risk_dont_show_again">不再提示</string>
+    <string name="risk_ask_ai">✦ 不确定？问 AI</string>
+    <string name="risk_root_title">给 DSH Compose root 权限？</string>
+    <string name="risk_root_action">使用 root</string>
+</resources>

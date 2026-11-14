@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="phone_controls_unlocks">限制</string>
+    <string name="phone_dnd_title">不打扰模式</string>
+    <string name="background_guide_title">后台确认与返回</string>
+</resources>

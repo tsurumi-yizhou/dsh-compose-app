@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="phone_controls_test_screen">Read current screen</string>
+    <string name="phone_controls_accessibility">Accessibility service</string>
+    <string name="phone_controls_accessibility_help">Enable dsh-compose in Android accessibility settings. The service can read screen content and perform gestures.</string>
+    <string name="phone_controls_restricted_help">If Android blocks the switch, open App details, choose Allow restricted settings in the menu, then return to accessibility settings.</string>
+    <string name="phone_controls_overlay_permission">Display over other apps</string>
+    <string name="phone_screen_current">Current screen</string>
+    <string name="phone_screen_copy">Copy</string>
+    <string name="phone_screen_empty">(No readable text on screen)</string>
+    <string name="phone_screen_read_note">This is what the model would see. This read wasn’t sent to the model.</string>
+    <string name="a11y_restore_title">Restore accessibility automatically</string>
+    <string name="a11y_restore_on">Authorized</string>
+    <string name="a11y_restore_notice">Once authorized, accessibility will be turned back on if disabled in system settings. To stop phone control, turn it off in DSH Compose.</string>
+    <string name="a11y_restore_force_stop">After a force stop, reopen DSH Compose to restore the service.</string>
+    <string name="a11y_restore_root_note">Uses the authorized root connection to grant only this permission.</string>
+    <string name="a11y_restore_setup">Set up Shizuku or wireless debugging</string>
+    <string name="a11y_restore_grant">Authorize and enable</string>
+    <string name="a11y_restore_grant_shizuku">Grant with Shizuku</string>
+    <string name="a11y_restore_grant_shizuku_permission">Authorize Shizuku, then grant</string>
+    <string name="a11y_restore_grant_adb">Grant with Direct ADB</string>
+    <string name="a11y_restore_computer">Or connect to a computer and run once:</string>
+    <string name="a11y_restore_copy">Copy command</string>
+    <string name="a11y_restore_copied">Command copied</string>
+    <string name="phone_controls_keeper_help">Allow dsh-compose to restore its accessibility service after Android stops it. This requires the secure settings permission.</string>
+</resources>

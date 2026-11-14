@@ -19,6 +19,7 @@ import android.provider.Settings
 import dev.fughetta.dshcompose.MainActivity
 import dev.fughetta.dshcompose.R
 import dev.fughetta.dshcompose.appearance.AppearanceStore
+import dev.fughetta.dshcompose.core.designsystem.R as CoreDesignsystemR
 import dev.fughetta.dshcompose.di.localPreferences
 import dev.fughetta.dshcompose.i18n.AppStrings
 import java.security.SecureRandom
@@ -93,7 +94,7 @@ class ChatNotifier(private val app: Context) {
         val locked = keyguard.isKeyguardLocked
         val public =
             Notification.Builder(app, channel)
-                .setSmallIcon(R.drawable.ic_stat_dsh)
+                .setSmallIcon(CoreDesignsystemR.drawable.ic_stat_dsh)
                 .setColor(AppearanceStore.notificationColor(app))
                 .setContentTitle(AppStrings.APP_NAME)
                 .setContentText(post.publicText)
@@ -102,7 +103,7 @@ class ChatNotifier(private val app: Context) {
             if (locked) AppStrings.APP_NAME to post.publicText else post.title to post.text
         val builder =
             Notification.Builder(app, channel)
-                .setSmallIcon(R.drawable.ic_stat_dsh)
+                .setSmallIcon(CoreDesignsystemR.drawable.ic_stat_dsh)
                 .setColor(AppearanceStore.notificationColor(app))
                 .setContentTitle(title)
                 .setContentText(text)
@@ -298,14 +299,14 @@ class ChatNotifier(private val app: Context) {
         }
         val public =
             Notification.Builder(app, channel)
-                .setSmallIcon(R.drawable.ic_stat_dsh)
+                .setSmallIcon(CoreDesignsystemR.drawable.ic_stat_dsh)
                 .setColor(AppearanceStore.notificationColor(app))
                 .setContentTitle(AppStrings.APP_NAME)
                 .setContentText(AppStrings.plural(app, R.plurals.notify_reminders, count, count))
                 .build()
         val summary =
             Notification.Builder(app, channel)
-                .setSmallIcon(R.drawable.ic_stat_dsh)
+                .setSmallIcon(CoreDesignsystemR.drawable.ic_stat_dsh)
                 .setColor(AppearanceStore.notificationColor(app))
                 .setContentTitle(title)
                 .setContentText(
@@ -456,7 +457,7 @@ class ChatNotifier(private val app: Context) {
         ensureChannels()
         val builder =
             Notification.Builder(app, CHANNEL_ATTENTION)
-                .setSmallIcon(R.drawable.ic_stat_dsh)
+                .setSmallIcon(CoreDesignsystemR.drawable.ic_stat_dsh)
                 .setColor(AppearanceStore.notificationColor(app))
                 .setContentTitle(post?.title ?: AppStrings.APP_NAME)
                 .setContentText(text)

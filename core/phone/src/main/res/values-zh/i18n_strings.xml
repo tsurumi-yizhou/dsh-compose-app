@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="overlay_allow_once">允许一次</string>
+    <string name="overlay_decline">拒绝</string>
+    <string name="overlay_stop">停止</string>
+    <string name="overlay_continue">继续</string>
+    <string name="overlay_handoff_secret">密码和验证码需要你来输入</string>
+    <string name="overlay_handoff_system">系统设置需要你来操作</string>
+    <string name="overlay_handoff_deny_list">不碰名单里的 App 需要你来操作</string>
+    <string name="phone_waived_status">免确认 · %1$s</string>
+    <string name="phone_acting">DSH 正在操作 · %1$s</string>
+</resources>

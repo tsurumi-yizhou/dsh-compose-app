@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="phone_install_new">安装这个应用？\n\n%1$s\n包名：%2$s\n版本：%3$s（%4$d）\n新安装\n目标设备：%5$s\n设备 ID：%6$s\n\n请只允许你信任的应用。安装结束前暂停手机操控输入，随后还需你在系统安装器中确认。</string>
+    <string name="phone_install_update">更新这个应用？\n\n%1$s\n包名：%2$s\n版本：%3$s（%4$d）\n覆盖已安装的应用\n目标设备：%5$s\n设备 ID：%6$s\n\n请只允许你信任的应用。安装结束前暂停手机操控输入，随后还需你在系统安装器中确认。</string>
+</resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="phone_prompt_result_channel">Phone control results</string>
+    <string name="phone_prompt_result_title">DSH Compose · Task complete</string>
+    <string name="phone_prompt_result_text">View results</string>
+</resources>

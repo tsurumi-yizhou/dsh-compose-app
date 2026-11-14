@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ui_config_unsupported_value">不支持的%1$s「%2$s」</string>
+    <string name="ui_json_position">第 %1$d 行第 %2$d 列：%3$s</string>
+    <string name="ui_config_value_options">不支持的%1$s「%2$s」，可选：%3$s</string>
+    <string name="ui_config_list_separator">、</string>
+</resources>

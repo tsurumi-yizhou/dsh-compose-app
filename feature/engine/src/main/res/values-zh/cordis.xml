@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cordis_subtitle">智能体在这台主机上写的动态插件</string>
+    <string name="cordis_count">%1$d 个插件 · %2$d 个运行中</string>
+    <string name="cordis_offline">未连接</string>
+    <string name="cordis_offline_hint">连接主机后可查看它的动态插件。</string>
+    <string name="cordis_unavailable">此连接无法使用 Cordis</string>
+    <string name="cordis_unavailable_hint">当前连接方式读不到动态插件，请直连主机后再管理。</string>
+    <string name="cordis_empty">还没有动态插件</string>
+    <string name="cordis_empty_hint">智能体在对话里写的插件会出现在这里。</string>
+    <string name="cordis_current_chat">当前对话</string>
+    <string name="cordis_other_chats">其他对话</string>
+    <string name="cordis_status_idle">未运行</string>
+    <string name="cordis_status_pending">等待批准</string>
+    <string name="cordis_status_starting">启动中</string>
+    <string name="cordis_status_running">运行中</string>
+    <string name="cordis_status_failed">运行失败</string>
+    <string name="cordis_failure_approval">运行未获批准</string>
+    <string name="cordis_failure_host">后台部分加载失败</string>
+    <string name="cordis_failure_client">界面加载失败</string>
+    <string name="cordis_failure_render">界面渲染失败</string>
+    <string name="cordis_failure_other">运行失败</string>
+    <string name="cordis_details">详情</string>
+    <string name="cordis_collapse">收起</string>
+    <string name="cordis_fact_status">状态</string>
+    <string name="cordis_fact_chat">所属对话</string>
+    <string name="cordis_fact_makeup">组成</string>
+    <string name="cordis_untitled_chat">未命名对话</string>
+    <string name="cordis_version_count">%1$d 个版本</string>
+    <string name="cordis_makeup_both">后台和界面</string>
+    <string name="cordis_makeup_host">仅后台</string>
+    <string name="cordis_makeup_client">仅界面</string>
+    <string name="cordis_interface_unavailable">主机还没有放置这个插件的界面，请先在它所属的对话里批准并运行。</string>
+    <string name="cordis_remove_title">移除 %1$s？</string>
+    <string name="cordis_remove_one">插件及其保存的版本将从这台主机移除。</string>
+    <string name="cordis_remove_versions">插件及其保存的全部 %1$d 个版本将从这台主机移除。</string>
+</resources>

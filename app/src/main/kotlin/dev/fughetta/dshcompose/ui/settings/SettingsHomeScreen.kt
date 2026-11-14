@@ -50,6 +50,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.round
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dev.fughetta.dshcompose.R
+import dev.fughetta.dshcompose.core.designsystem.R as CoreDesignsystemR
 import dev.fughetta.dshcompose.domain.nativeplugins.*
 import dev.fughetta.dshcompose.ui.ActionIcon
 import dev.fughetta.dshcompose.ui.AppAction
@@ -95,11 +96,11 @@ internal fun SettingsScreen(
         containerColor = Color.Transparent,
         topBar = {
             LargeTopAppBar(
-                title = { Text(stringResource(R.string.settings)) },
+                title = { Text(stringResource(CoreDesignsystemR.string.settings)) },
                 scrollBehavior = scrollBehavior,
                 actions = {
                     ActionIcon(
-                        R.drawable.ic_search,
+                        CoreDesignsystemR.drawable.ic_search,
                         stringResource(R.string.settings_search_title),
                     ) {
                         onPage(FeaturePage.Search)
@@ -325,7 +326,9 @@ private fun <T> SettingsChoiceRow(
                 }
             },
             confirmButton = {
-                TextButton(onClick = { open = false }) { Text(stringResource(R.string.cancel)) }
+                TextButton(onClick = { open = false }) {
+                    Text(stringResource(CoreDesignsystemR.string.cancel))
+                }
             },
         )
     }
@@ -382,23 +385,23 @@ private fun sectionIcon(section: SettingsSection): Int =
         SettingsSection.Advanced -> R.drawable.ic_s_tune
         SettingsSection.Hosts -> R.drawable.ic_s_monitor
         SettingsSection.Tools -> R.drawable.ic_s_tune
-        SettingsSection.Help -> R.drawable.ic_s_help
+        SettingsSection.Help -> CoreDesignsystemR.drawable.ic_s_help
     }
 
 /** Each built-in settings destination has its own glyph. */
 @DrawableRes
 private fun entryIcon(entry: FeatureContribution): Int =
     when (entry.id) {
-        "settings.navigation_notifications" -> R.drawable.ic_s_bell
+        "settings.navigation_notifications" -> CoreDesignsystemR.drawable.ic_s_bell
         "settings.providers" -> R.drawable.ic_s_cloud
         "settings.permissions_title" -> R.drawable.ic_s_lock
         "settings.personalization_title" -> R.drawable.ic_s_person
-        "settings.agent_presets" -> R.drawable.ic_s_robot
-        "settings.navigation_phone_controls" -> R.drawable.ic_s_phone
+        "settings.agent_presets" -> CoreDesignsystemR.drawable.ic_s_robot
+        "settings.navigation_phone_controls" -> CoreDesignsystemR.drawable.ic_s_phone
         "settings.navigation_plugins" -> R.drawable.ic_s_extension
         "settings.navigation_plugin_panels" -> R.drawable.ic_s_panels
         "settings.navigation_native_plugins" -> R.drawable.ic_s_widgets
-        "settings.navigation_media_settings" -> R.drawable.ic_s_image
+        "settings.navigation_media_settings" -> CoreDesignsystemR.drawable.ic_s_image
         "settings.navigation_media_works" -> R.drawable.ic_s_gallery
         "settings.appearance" -> R.drawable.ic_s_palette
         "settings.quick_panel_title" -> R.drawable.ic_s_shortcut
@@ -407,7 +410,7 @@ private fun entryIcon(entry: FeatureContribution): Int =
         "settings.navigation_engine_configuration" -> R.drawable.ic_s_configuration
         "settings.navigation_terminal" -> R.drawable.ic_s_terminal
         "settings.navigation_schedules" -> R.drawable.ic_s_calendar
-        "settings.ask_ai_help" -> R.drawable.ic_s_help
+        "settings.ask_ai_help" -> CoreDesignsystemR.drawable.ic_s_help
         "settings.about" -> R.drawable.ic_s_info
         else -> entry.section?.let(::sectionIcon) ?: R.drawable.ic_s_tune
     }

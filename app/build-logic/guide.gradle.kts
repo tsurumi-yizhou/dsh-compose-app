@@ -250,7 +250,14 @@ val generateGuide =
             },
         )
         stringResources.from(
-            fileTree("src/main/res") { include("values/*.xml", "values-zh/*.xml") },
+            rootProject.fileTree(".") {
+                include(
+                    "app/src/main/res/values*/*.xml",
+                    "core/*/src/main/res/values*/*.xml",
+                    "feature/*/src/main/res/values*/*.xml",
+                )
+                exclude("feature/accessibility/**")
+            },
         )
         appVersion.set(providers.gradleProperty("appVersion"))
         outputDirectory.set(rootProject.layout.buildDirectory.dir("generated/guideAssets"))

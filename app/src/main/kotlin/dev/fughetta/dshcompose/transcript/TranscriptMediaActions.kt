@@ -3,11 +3,12 @@ package dev.fughetta.dshcompose.transcript
 import android.app.Application
 import androidx.lifecycle.viewModelScope
 import dev.fughetta.dshcompose.*
-import dev.fughetta.dshcompose.R as UiR
+import dev.fughetta.dshcompose.R
 import dev.fughetta.dshcompose.appearance.*
 import dev.fughetta.dshcompose.connection.connectLocal
 import dev.fughetta.dshcompose.connection.connectService
 import dev.fughetta.dshcompose.connection.status
+import dev.fughetta.dshcompose.core.designsystem.R as CoreDesignsystemR
 import dev.fughetta.dshcompose.domain.messages.*
 import dev.fughetta.dshcompose.i18n.AppStrings
 import dev.fughetta.dshcompose.messages.handlePendingPrompt
@@ -189,7 +190,7 @@ internal fun AppViewModel.handleTranscriptMedia(action: AppAction): Boolean {
                         it.copy(
                             licensesError =
                                 getApplication<Application>()
-                                    .getString(UiR.string.licenses_unavailable),
+                                    .getString(R.string.licenses_unavailable),
                         )
                     }
                 }
@@ -301,7 +302,7 @@ internal fun AppViewModel.handleTranscriptMedia(action: AppAction): Boolean {
                             it.copy(
                                 error =
                                     getApplication<Application>()
-                                        .getString(UiR.string.engine_not_connected),
+                                        .getString(CoreDesignsystemR.string.engine_not_connected),
                             )
                         }
                     return@launch
@@ -335,14 +336,20 @@ internal fun AppViewModel.handleTranscriptMedia(action: AppAction): Boolean {
                                     UiReplyLabels(
                                         AppStrings.get(
                                             application,
-                                            UiR.string.view_reply_select,
+                                            R.string.view_reply_select,
                                         ),
                                         AppStrings.get(
                                             application,
-                                            UiR.string.view_reply_other,
+                                            R.string.view_reply_other,
                                         ),
-                                        AppStrings.get(application, UiR.string.confirm),
-                                        AppStrings.get(application, UiR.string.cancel),
+                                        AppStrings.get(
+                                            application,
+                                            CoreDesignsystemR.string.confirm,
+                                        ),
+                                        AppStrings.get(
+                                            application,
+                                            CoreDesignsystemR.string.cancel,
+                                        ),
                                     )
                                 val text =
                                     withContext(Dispatchers.Default) {
@@ -365,7 +372,7 @@ internal fun AppViewModel.handleTranscriptMedia(action: AppAction): Boolean {
                                                 ) {
                                                     AppStrings.get(
                                                         application,
-                                                        UiR.string.view_resend_message,
+                                                        R.string.view_resend_message,
                                                         it,
                                                     )
                                                 }
@@ -377,7 +384,7 @@ internal fun AppViewModel.handleTranscriptMedia(action: AppAction): Boolean {
                                                 ) { name, data ->
                                                     AppStrings.get(
                                                         application,
-                                                        UiR.string.view_genui_action,
+                                                        R.string.view_genui_action,
                                                         name,
                                                         data,
                                                     )
@@ -408,7 +415,7 @@ internal fun AppViewModel.handleTranscriptMedia(action: AppAction): Boolean {
                                             error =
                                                 AppStrings.get(
                                                     application,
-                                                    UiR.string.view_expired,
+                                                    CoreDesignsystemR.string.view_expired,
                                                 ),
                                         )
                                     }
@@ -436,7 +443,7 @@ internal fun AppViewModel.handleTranscriptMedia(action: AppAction): Boolean {
                                             error =
                                                 AppStrings.get(
                                                     getApplication<Application>(),
-                                                    UiR.string.view_send_failed,
+                                                    R.string.view_send_failed,
                                                 ),
                                         )
                                     }
@@ -476,7 +483,7 @@ internal fun AppViewModel.handleTranscriptMedia(action: AppAction): Boolean {
                                     it.copy(
                                         error =
                                             getApplication<Application>()
-                                                .getString(UiR.string.approval_expired),
+                                                .getString(R.string.approval_expired),
                                     )
                                 }
                                 return@launch
@@ -516,7 +523,7 @@ internal fun AppViewModel.handleTranscriptMedia(action: AppAction): Boolean {
                                     it.copy(
                                         error =
                                             getApplication<Application>()
-                                                .getString(UiR.string.approval_expired),
+                                                .getString(R.string.approval_expired),
                                     )
                                 }
                                 return@launch

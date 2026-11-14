@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="overlay_allow_once">Allow once</string>
+    <string name="overlay_decline">Decline</string>
+    <string name="overlay_stop">Stop</string>
+    <string name="overlay_continue">Continue</string>
+    <string name="overlay_handoff_secret">Passwords and codes are yours to enter</string>
+    <string name="overlay_handoff_system">System settings are yours to change</string>
+    <string name="overlay_handoff_deny_list">Apps on your hands-off list are yours to use</string>
+    <string name="phone_waived_status">No approval needed · %1$s</string>
+    <string name="phone_acting">DSH is acting · %1$s</string>
+</resources>

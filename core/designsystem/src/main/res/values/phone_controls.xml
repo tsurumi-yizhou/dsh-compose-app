@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="phone_controls_unlocks">Restrictions</string>
+    <string name="phone_dnd_title">Non-disruptive mode</string>
+    <string name="background_guide_title">Confirmations and return</string>
+</resources>

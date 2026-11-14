@@ -13,6 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import dev.fughetta.dshcompose.R
+import dev.fughetta.dshcompose.core.designsystem.R as CoreDesignsystemR
 import dev.fughetta.dshcompose.ui.Spacing
 import dev.fughetta.dshcompose.ui.UpButton
 import dev.fughetta.dshcompose.ui.adaptive.CenteredContent
@@ -71,7 +72,7 @@ fun ReplyPrefsScreen(
         containerColor = Color.Transparent,
         topBar = {
             TopAppBar(
-                title = { Text(stringResource(R.string.reply_prefs_title)) },
+                title = { Text(stringResource(CoreDesignsystemR.string.reply_prefs_title)) },
                 navigationIcon = { UpButton() },
             )
         },

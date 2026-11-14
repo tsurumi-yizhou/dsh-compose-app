@@ -5,8 +5,9 @@ import android.net.Uri
 import androidx.lifecycle.viewModelScope
 import dev.fughetta.dshcompose.*
 import dev.fughetta.dshcompose.AppViewModel.IncomingAttachment
-import dev.fughetta.dshcompose.R as UiR
+import dev.fughetta.dshcompose.R
 import dev.fughetta.dshcompose.appearance.*
+import dev.fughetta.dshcompose.core.designsystem.R as CoreDesignsystemR
 import dev.fughetta.dshcompose.domain.attachments.AttachmentImportException
 import dev.fughetta.dshcompose.domain.attachments.AttachmentLimits
 import dev.fughetta.dshcompose.domain.attachments.AttachmentSource
@@ -83,9 +84,9 @@ internal suspend fun AppViewModel.importFiles(
                 } catch (error: Exception) {
                     val message =
                         when ((error as? AttachmentImportException)?.code) {
-                            "too_many" -> UiR.string.attachment_too_many
-                            "too_large" -> UiR.string.attachment_too_large
-                            else -> UiR.string.attachment_unreadable
+                            "too_many" -> R.string.attachment_too_many
+                            "too_large" -> R.string.attachment_too_large
+                            else -> CoreDesignsystemR.string.attachment_unreadable
                         }
                     updateChat(id) {
                         it.copy(error = getApplication<Application>().getString(message))
@@ -140,7 +141,7 @@ internal fun AppViewModel.importShares(): Unit {
                             it.copy(
                                 error =
                                     getApplication<Application>()
-                                        .getString(UiR.string.attachment_unreadable),
+                                        .getString(CoreDesignsystemR.string.attachment_unreadable),
                             )
                         }
                     sharedInbox.removeFirst()

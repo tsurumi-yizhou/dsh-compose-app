@@ -1,6 +1,6 @@
 # Android app
 
-`:app` contains the Compose interface, navigation, page ViewModels, Android platform integration and application assembly. The Kotlin protocol client lives in `:data:protocol`; business repositories live in `:data`.
+`:app` assembles feature ViewModels, owns root navigation and Android application entrypoints, and coordinates cross-feature actions. Application-wide appearance, notification and launcher integration remain here. The Kotlin protocol client lives in `:data:protocol`; business repositories live in `:data`.
 
 Build DSH Compose Host in its own checkout with `bash build.sh`, or download `host.tgz` from one of its releases. Point the build at the archive with `-PhostPackage=/absolute/path/to/host.tgz` (or the `DSH_HOST_PACKAGE` environment variable); there is no default location. Build the app with `./gradlew :app:assembleArm64Debug` and run unit tests with `./gradlew :app:testArm64DebugUnitTest`. Android packages this artifact with its guest setup scripts; it does not compile host sources.
 
@@ -23,3 +23,23 @@ Document questions use text or rich-layout parsing; spreadsheets and text use `u
 ## Android runtime
 
 The app targets Android API 36. Local engine startup always uses PRoot and its loader installed in `nativeLibraryDir`; writable rootfs executables are loaded inside PRoot. The former direct glibc launch option is removed. Android 11+ shared-storage mounts require the user to grant All files access. Cloud backup and device transfer exclude application data, including the rootfs and credentials.
+
+## Modules
+
+The feature boundaries follow [Google’s modularization guidance](https://developer.android.com/topic/modularization/patterns). Each feature owns its screens, controllers, dedicated resources and tests:
+
+- `:feature:phone`: phone control, background Shizuku/self-ADB control and APK installation. Its manifest owns the corresponding provider, receivers and job service.
+- `:feature:providers`: provider credentials, subscriptions, model selection and agent presets.
+- `:feature:engine`: local-engine setup and controls, engine configuration, plugin management and terminal UI.
+- `:feature:files`: workspaces, file/reference selection, previews and exports.
+- `:feature:chat`: conversations, transcript rendering, composer, session tools and generated media. It embeds the public provider-picker and file-picker surfaces.
+
+Each feature's `:api` module holds the state and contracts consumed by the application shell. `:feature:shell:api` owns aggregate `AppState`, `AppAction` and contribution contracts and depends on those APIs; feature implementations depend on the shell contracts. No feature depends on `:app`.
+
+`:core:platform` owns shared Android settings, localization, visibility, performance and file utilities. `:core:designsystem` owns the theme, adaptive layouts and shared visual resources. `:core:phone` owns shared phone-driver, prompt, safety and task contracts. Shared repository fakes live in `:core:platform` test fixtures. Domain rules and repository implementations retain their existing `:domain` and `:data` ownership.
+
+The application injects engine-install service callbacks and implements `ApplicationHost` for navigation and notification refresh. Library code does not refer directly to application activities or `EngineService`.
+
+`:feature:accessibility` owns the accessibility service, driver, overlay, settings UI, resources and tests. It remains excluded from app dependencies and navigation. Main-screen control is unavailable; background control remains available. All features are ordinary Android libraries, not Play dynamic-delivery modules.
+
+CI runs tests in the owning modules before assembling the app. For example, run `:feature:phone:testDebugUnitTest`, `:feature:chat:testDebugUnitTest`, or `:feature:engine:testArm64DebugUnitTest`; accessibility remains independently testable with `:feature:accessibility:testDebugUnitTest`.

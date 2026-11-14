@@ -185,8 +185,6 @@ android {
 
 apply(from = "build-logic/guide.gradle.kts")
 
-apply(from = "build-logic/syntax.gradle.kts")
-
 apply(from = "build-logic/delta.gradle.kts")
 
 apply(from = "build-logic/release.gradle.kts")
@@ -201,10 +199,6 @@ androidComponents {
         variant.sources.assets?.addGeneratedSourceDirectory(tasks.named("generateGuide")) { task ->
             task.property("outputDirectory") as DirectoryProperty
         }
-        variant.sources.resources?.addGeneratedSourceDirectory(tasks.named("generateSyntax")) { task
-            ->
-            task.property("outputDirectory") as DirectoryProperty
-        }
         val flavorName = variant.productFlavors.single { it.first == "abi" }.second
         val apk = variant.artifacts.get(SingleArtifact.APK)
         if (variant.buildType == "release") registerRelease.execute(flavorName to apk)
@@ -213,6 +207,16 @@ androidComponents {
 }
 
 dependencies {
+    testImplementation(testFixtures(project(":core:platform")))
+    implementation(project(":core:phone"))
+    implementation(project(":core:platform"))
+    implementation(project(":core:designsystem"))
+    implementation(project(":feature:shell:api"))
+    implementation(project(":feature:phone"))
+    implementation(project(":feature:providers"))
+    implementation(project(":feature:engine"))
+    implementation(project(":feature:files"))
+    implementation(project(":feature:chat"))
     implementation("androidx.work:work-runtime-ktx:2.12.0")
     implementation(project(":domain"))
     implementation(project(":data"))
@@ -220,7 +224,6 @@ dependencies {
     implementation(project(":data:protocol"))
     implementation(project(":data:engine"))
     implementation("com.github.penfeizhou.android.animation:awebp:3.0.5")
-    implementation("org.connectbot:termlib:0.3.15")
     implementation("io.coil-kt.coil3:coil-svg:3.6.3")
     implementation("io.coil-kt.coil3:coil-core:3.6.3")
     implementation(platform("io.ktor:ktor-bom:3.6.1"))
@@ -234,15 +237,7 @@ dependencies {
     implementation("androidx.navigation3:navigation3-runtime:1.3.0-alpha04")
     implementation("androidx.navigation3:navigation3-ui:1.3.0-alpha04")
     implementation("com.google.zxing:core:3.5.4")
-    implementation("org.jsoup:jsoup:1.24.1")
-    implementation("io.github.huarangmeng:latex-renderer:1.7.3")
-    implementation("io.github.huarangmeng:latex-fonts-katex:1.7.3")
-    implementation("io.github.dokar3:quickjs-kt:1.0.18")
     implementation("io.coil-kt.coil3:coil-compose-core:3.6.3")
-    implementation("org.commonmark:commonmark:0.32.0")
-    implementation("org.commonmark:commonmark-ext-gfm-tables:0.32.0")
-    implementation("org.commonmark:commonmark-ext-gfm-strikethrough:0.32.0")
-    implementation("org.commonmark:commonmark-ext-task-list-items:0.32.0")
     implementation("androidx.activity:activity-compose:1.13.0")
     implementation("androidx.vectordrawable:vectordrawable-animated:1.1.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.11.0")
@@ -261,24 +256,4 @@ dependencies {
     testImplementation("io.ktor:ktor-client-mock")
     testImplementation("io.ktor:ktor-server-cio")
     testImplementation("io.ktor:ktor-server-websockets")
-
-    // 不打扰模式 (phone/background): a shell-uid privileged display via Shizuku or self-ADB.
-    implementation("dev.rikka.shizuku:api:13.1.5") // MIT
-    implementation("dev.rikka.shizuku:provider:13.1.5") // MIT
-    implementation(
-        "com.github.MuntashirAkon:libadb-android:3.1.1",
-    ) // used under its Apache-2.0 option; pulls in spake2-android (LGPL-3.0)
-    implementation("org.conscrypt:conscrypt-android:2.9.0") // Apache-2.0: libadb TLS/pairing
-    // MIT: self-signed ADB client certificates; shares the jdk15to18 BC artifacts used by libadb
-    // and Remote.
-    implementation("org.bouncycastle:bcpkix-jdk15to18:1.87")
 }
-
-configurations
-    .matching { it.name.endsWith("UnitTestRuntimeClasspath") }
-    .configureEach {
-        resolutionStrategy.dependencySubstitution {
-            substitute(module("io.github.dokar3:quickjs-kt-android"))
-                .using(module("io.github.dokar3:quickjs-kt-jvm:1.0.18"))
-        }
-    }

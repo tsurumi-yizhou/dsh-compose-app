@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_ns_default_model">Default model</string>
+    <string name="settings_ns_default_preset">Default preset</string>
+    <string name="settings_ns_agent">Agent</string>
+    <string name="settings_ns_subagent">Subagent</string>
+    <string name="settings_ns_subagent_models">Subagent models</string>
+    <string name="settings_ns_deep_seek_model">DeepSeek model</string>
+    <string name="settings_ns_account_model">DeepSeek account model</string>
+    <string name="settings_ns_custom_models">Custom model service</string>
+    <string name="settings_ns_network">Internet access</string>
+    <string name="settings_ns_research">File understanding &amp; web research</string>
+    <string name="settings_ns_web_search">Web search</string>
+    <string name="settings_ns_search_api">Web search API</string>
+    <string name="settings_ns_commands">Command execution</string>
+    <string name="settings_ns_permissions">Permissions</string>
+    <string name="settings_ns_chat_log">Chat log</string>
+    <string name="settings_ns_thinking_translation">Thinking translation</string>
+    <string name="settings_ns_translation">Translation</string>
+    <string name="settings_ns_language">Language</string>
+    <string name="settings_ns_web_appearance">Web appearance</string>
+    <string name="settings_ns_web_chat">Web chat</string>
+    <string name="settings_ns_web_input">Web input</string>
+    <string name="settings_ns_web_settings">Web settings</string>
+    <string name="settings_ns_web_general">Web general</string>
+    <string name="settings_ns_auto_review">Auto review</string>
+    <string name="settings_ns_agent_team">Agent team</string>
+    <string name="plugin_panels_empty">No plugin panels are available.</string>
+</resources>

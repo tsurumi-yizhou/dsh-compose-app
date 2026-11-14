@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_appearance">Appearance</string>
     <string name="app_theme">Theme</string>
@@ -44,20 +45,10 @@
     <string name="app_media_unreadable">Could not read this media. Choose the file again.</string>
     <string name="app_shortcut_added">Shortcut added</string>
     <string name="app_shortcut_requested">Confirm the shortcut in your launcher.</string>
-    <string name="composer_add">Add attachment or reference</string>
     <string name="settings_choose_page">Choose a setting</string>
     <string name="composer_photos">Photos</string>
     <string name="composer_capture">Camera</string>
     <string name="composer_files">Files</string>
-    <string name="composer_location">Location</string>
     <string name="composer_media">Video and audio</string>
     <string name="composer_picker_failed">Could not open the picker or camera.</string>
-    <string name="composer_location_request">Get current location</string>
-    <string name="composer_location_wait">Getting location…</string>
-    <string name="composer_location_failed">Location unavailable. Check location permission and system location settings, then retry.</string>
-    <string name="composer_location_add">Insert into draft</string>
-    <string name="composer_location_help">Get your current location and review the coordinates before adding them to your message.</string>
-    <string name="composer_no_mentions">No matching references</string>
-    <string name="provider_auto_models_help">Models are fetched automatically when you save. Leave the key empty to use the saved key for an unchanged endpoint.</string>
-    <string name="provider_fetch_save">Fetch models and save</string>
 </resources>

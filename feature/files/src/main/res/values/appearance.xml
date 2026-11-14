@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="composer_no_mentions">No matching references</string>
+</resources>

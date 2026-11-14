@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ui_config_unsupported_value">Unsupported %1$s “%2$s”</string>
+    <string name="ui_json_position">Line %1$d, column %2$d: %3$s</string>
+    <string name="ui_config_value_options">Unsupported %1$s “%2$s”, options: %3$s</string>
+    <string name="ui_config_list_separator">", "</string>
+</resources>

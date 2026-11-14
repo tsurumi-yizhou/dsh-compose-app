@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="phone_prompt_result_channel">手机操控结果</string>
+    <string name="phone_prompt_result_title">DSH Compose · 任务完成</string>
+    <string name="phone_prompt_result_text">查看结果</string>
+</resources>

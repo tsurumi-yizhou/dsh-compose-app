@@ -1,33 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="agents_lineage">Subagents</string>
-    <string name="agents_members">Team members</string>
-    <string name="agents_tasks">Task board</string>
-    <string name="agents_messages">Team messages</string>
-    <string name="agents_offline">Connect to a host to view agents.</string>
-    <string name="agents_select_session">Open a conversation first.</string>
-    <string name="agents_refresh">Refresh</string>
-    <string name="agents_open_parent">Open parent conversation</string>
-    <string name="agents_no_children">This conversation has no subagents.</string>
-    <string name="agents_open">Open conversation</string>
-    <string name="agents_interrupt">Interrupt</string>
-    <string name="agents_no_team">This conversation has no agent team.</string>
-    <string name="agents_enable_team">Enable Agent Teams</string>
-    <string name="agents_running">Running</string>
-    <string name="agents_task_owner">Owner: %1$s</string>
-    <string name="agents_blocked_by">Blocked by: %1$s</string>
-    <string name="agents_write_scopes">Write scopes: %1$s</string>
-    <string name="agents_load_messages">Refresh recent team messages</string>
-    <string name="agents_incomplete">Some members could not be read: %1$s</string>
     <string name="agents_restart_required">The host requires an engine restart to apply this change.</string>
     <string name="agents_failed">The host could not complete the agent action (%1$s).</string>
-    <string name="agents_once">One shot</string>
-    <string name="agents_continuable">Continuable</string>
-    <string name="agents_external">External execution</string>
-    <string name="agents_unknown">Mode not determined</string>
-    <string name="agents_completed">Completed</string>
-    <string name="agents_failure">Failed</string>
-    <string name="agents_preparing">Preparing</string>
-    <string name="agents_pending">Pending</string>
-    <string name="agents_idle">Idle</string>
 </resources>

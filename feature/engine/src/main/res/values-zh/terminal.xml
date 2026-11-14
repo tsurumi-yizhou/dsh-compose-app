@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="terminal_refresh">刷新</string>
+    <string name="terminal_new">新建终端</string>
+    <string name="terminal_keyboard">键盘</string>
+    <string name="terminal_unsupported">此连接无法传输交互式终端输入。</string>
+    <string name="terminal_starting">正在启动</string>
+    <string name="terminal_connecting">正在连接</string>
+    <string name="terminal_live">已连接</string>
+    <string name="terminal_read_only">只读：输入权由其他连接持有</string>
+    <string name="terminal_disconnected">已断开</string>
+    <string name="terminal_ended">已结束</string>
+    <string name="terminal_missing">终端已不存在</string>
+    <string name="terminal_failed">启动失败</string>
+    <string name="terminal_reconnect">重新连接／接管输入</string>
+    <string name="terminal_rename">重命名</string>
+    <string name="terminal_close">关闭终端</string>
+    <string name="terminal_paste">粘贴</string>
+    <string name="terminal_save">保存</string>
+    <string name="terminal_cancel">取消</string>
+    <string name="terminal_close_title">结束此终端？</string>
+    <string name="terminal_close_text">此操作会结束所选主机上的 Shell 及其子进程。离开页面会保留进程。</string>
+    <string name="terminal_clipboard_title">允许终端写入剪贴板？</string>
+    <string name="terminal_clipboard_text">远端程序请求替换手机剪贴板。是否仅允许本次请求？</string>
+    <string name="terminal_allow">允许</string>
+    <string name="terminal_open_link">打开此链接？</string>
+    <string name="terminal_error_input_full">输入缓冲已满，请稍候</string>
+    <string name="terminal_error_unavailable">终端不可用，引擎可能不支持或它已经结束</string>
+    <string name="terminal_error_connection">连接失败</string>
+    <string name="terminal_error_link">没能打开链接</string>
+    <string name="terminal_error_unknown">操作失败（%1$s）</string>
+    <string name="terminal_no_session">请先打开一个会话再使用终端</string>
+    <string name="terminal_empty_title">还没有终端</string>
+    <string name="terminal_shortcuts_hide">收起快捷键</string>
+    <string name="terminal_shortcuts_show">展开快捷键</string>
+</resources>

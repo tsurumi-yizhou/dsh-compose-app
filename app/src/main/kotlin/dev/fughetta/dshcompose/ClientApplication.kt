@@ -5,7 +5,23 @@ import android.util.Log
 import dev.fughetta.dshcompose.di.localPreferences
 import kotlinx.coroutines.*
 
-class ClientApplication : Application() {
+class ClientApplication : Application(), dev.fughetta.dshcompose.platform.ApplicationHost {
+    override fun appIntent(context: android.content.Context) =
+        dev.fughetta.dshcompose.shortcuts.EntryActivity.openApp(context)
+
+    override fun chatIntent(context: android.content.Context, sessionId: String, host: String?) =
+        dev.fughetta.dshcompose.shortcuts.EntryActivity.openChat(context, sessionId, host)
+
+    override fun linkIntent(context: android.content.Context, url: String) =
+        android.content
+            .Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse(url))
+            .setClass(context, dev.fughetta.dshcompose.links.LinkTrampolineActivity::class.java)
+
+    override fun refreshPhoneNotifications(context: android.content.Context) {
+        dev.fughetta.dshcompose.runtime.EngineService.updateNotification(context)
+        dev.fughetta.dshcompose.notify.LiveActivity.refresh(context)
+    }
+
     private val applicationScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
     internal val dataSources by lazy {

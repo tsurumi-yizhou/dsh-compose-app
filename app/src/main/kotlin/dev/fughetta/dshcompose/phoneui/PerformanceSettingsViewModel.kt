@@ -3,7 +3,7 @@ package dev.fughetta.dshcompose.phoneui
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.fughetta.dshcompose.R as UiR
+import dev.fughetta.dshcompose.R
 import dev.fughetta.dshcompose.i18n.AppStrings
 import dev.fughetta.dshcompose.ui.phone.*
 import kotlinx.coroutines.*
@@ -69,7 +69,7 @@ class PerformanceSettingsViewModel(
                             else
                                 AppStrings.get(
                                     app,
-                                    UiR.string.phone_controls_performance_save_failed,
+                                    R.string.phone_controls_performance_save_failed,
                                 ),
                     )
         }

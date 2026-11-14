@@ -5,8 +5,9 @@ import android.content.Intent
 import android.net.Uri
 import androidx.lifecycle.viewModelScope
 import dev.fughetta.dshcompose.*
-import dev.fughetta.dshcompose.R as UiR
+import dev.fughetta.dshcompose.R
 import dev.fughetta.dshcompose.appearance.*
+import dev.fughetta.dshcompose.core.designsystem.R as CoreDesignsystemR
 import dev.fughetta.dshcompose.domain.OperationFailure
 import dev.fughetta.dshcompose.domain.attachments.AttachmentImportException
 import dev.fughetta.dshcompose.domain.attachments.AttachmentLimits
@@ -59,7 +60,7 @@ internal fun AppViewModel.retryTranscriptNotice(id: String, key: String): Unit {
                     overrideText =
                         plan.repeatText
                             ?: getApplication<Application>()
-                                .getString(UiR.string.transcript_continue_prompt),
+                                .getString(R.string.transcript_continue_prompt),
                 )
             } catch (error: CancellationException) {
                 throw error
@@ -111,7 +112,7 @@ internal suspend fun AppViewModel.handleMediaEffect(
             is dev.fughetta.dshcompose.ui.media.MediaEffect.Message -> {
                 val text =
                     if (effect.code == "media/saved")
-                        AppStrings.get(app, UiR.string.media_export_saved)
+                        AppStrings.get(app, R.string.media_export_saved)
                     else effect.code
                 android.widget.Toast.makeText(app, text, android.widget.Toast.LENGTH_SHORT).show()
             }
@@ -140,7 +141,7 @@ internal suspend fun AppViewModel.handleMediaEffect(
                     app.startActivity(
                         Intent.createChooser(
                                 send,
-                                AppStrings.get(app, UiR.string.message_action_share),
+                                AppStrings.get(app, CoreDesignsystemR.string.message_action_share),
                             )
                             .addFlags(
                                 Intent.FLAG_ACTIVITY_NEW_TASK or
@@ -286,7 +287,7 @@ internal fun AppViewModel.performMessageOperation(
                     app.startActivity(
                         Intent.createChooser(
                                 send,
-                                AppStrings.get(app, UiR.string.message_action_share),
+                                AppStrings.get(app, CoreDesignsystemR.string.message_action_share),
                             )
                             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
                     )
@@ -385,11 +386,11 @@ internal fun AppViewModel.performMessageOperation(
                         forkWarning =
                             when {
                                 outcome.cleanupUnknown || outcome.leftQueued > 0 ->
-                                    AppStrings.get(app, UiR.string.message_fork_queue_warning)
+                                    AppStrings.get(app, R.string.message_fork_queue_warning)
                                 operation ==
                                     dev.fughetta.dshcompose.ui.messages.MessageOperation.Edit &&
                                     prompt?.attachments?.isNotEmpty() == true ->
-                                    AppStrings.get(app, UiR.string.message_fork_reattach)
+                                    AppStrings.get(app, R.string.message_fork_reattach)
                                 else -> null
                             },
                     )

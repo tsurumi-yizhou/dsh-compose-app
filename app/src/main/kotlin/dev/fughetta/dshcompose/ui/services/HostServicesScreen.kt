@@ -14,6 +14,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dev.fughetta.dshcompose.R
+import dev.fughetta.dshcompose.core.designsystem.R as CoreDesignsystemR
 import dev.fughetta.dshcompose.ui.*
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -58,7 +59,7 @@ fun HostServicesScreen(state: AppState, onAction: (AppAction) -> Unit) {
                 },
                 dismissButton = {
                     TextButton(onClick = { removing = null }) {
-                        Text(stringResource(R.string.cancel))
+                        Text(stringResource(CoreDesignsystemR.string.cancel))
                     }
                 },
             )
@@ -67,11 +68,13 @@ fun HostServicesScreen(state: AppState, onAction: (AppAction) -> Unit) {
         containerColor = Color.Transparent,
         topBar = {
             TopAppBar(
-                title = { Text(stringResource(R.string.navigation_compose_services)) },
+                title = {
+                    Text(stringResource(CoreDesignsystemR.string.navigation_compose_services))
+                },
                 navigationIcon = { UpButton() },
                 actions = {
                     ActionIcon(
-                        R.drawable.ic_add,
+                        CoreDesignsystemR.drawable.ic_add,
                         stringResource(R.string.compose_host_add),
                         enabled = !state.remoteHostsBusy,
                     ) {
@@ -107,8 +110,8 @@ fun HostServicesScreen(state: AppState, onAction: (AppAction) -> Unit) {
                         stringResource(
                             when {
                                 pairing -> R.string.compose_host_pairing
-                                connected -> R.string.compose_host_connected
-                                else -> R.string.compose_host_idle
+                                connected -> CoreDesignsystemR.string.compose_host_connected
+                                else -> CoreDesignsystemR.string.compose_host_idle
                             },
                         )
                     OutlinedCard(
@@ -165,8 +168,8 @@ fun HostServicesScreen(state: AppState, onAction: (AppAction) -> Unit) {
                                         enabled = !state.remoteHostsBusy,
                                     ) {
                                         Icon(
-                                            painterResource(R.drawable.ic_more),
-                                            stringResource(R.string.more_actions),
+                                            painterResource(CoreDesignsystemR.drawable.ic_more),
+                                            stringResource(CoreDesignsystemR.string.more_actions),
                                         )
                                     }
                                     DropdownMenu(
@@ -214,7 +217,8 @@ fun HostServicesScreen(state: AppState, onAction: (AppAction) -> Unit) {
                                 ) {
                                     Text(
                                         stringResource(
-                                            if (connected) R.string.compose_host_connected
+                                            if (connected)
+                                                CoreDesignsystemR.string.compose_host_connected
                                             else R.string.compose_host_connect_action,
                                         ),
                                     )

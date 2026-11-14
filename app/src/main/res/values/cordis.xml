@@ -1,39 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="cordis_title">Cordis</string>
-    <string name="cordis_subtitle">Dynamic plugins the agent wrote on this Host</string>
-    <string name="cordis_count">%1$d plugins · %2$d running</string>
-    <string name="cordis_offline">Not connected</string>
-    <string name="cordis_offline_hint">Connect to a Host to see its dynamic plugins.</string>
-    <string name="cordis_unavailable">Cordis is unavailable here</string>
-    <string name="cordis_unavailable_hint">This connection cannot read dynamic plugins. Connect to the Host directly to manage them.</string>
-    <string name="cordis_empty">No dynamic plugins yet</string>
-    <string name="cordis_empty_hint">Plugins the agent writes in a conversation appear here.</string>
-    <string name="cordis_current_chat">This conversation</string>
-    <string name="cordis_other_chats">Other conversations</string>
-    <string name="cordis_status_idle">Not running</string>
-    <string name="cordis_status_pending">Waiting for approval</string>
-    <string name="cordis_status_starting">Starting</string>
-    <string name="cordis_status_running">Running</string>
-    <string name="cordis_status_failed">Run failed</string>
-    <string name="cordis_failure_approval">The run was not approved</string>
-    <string name="cordis_failure_host">The backend part failed to load</string>
-    <string name="cordis_failure_client">The interface failed to load</string>
-    <string name="cordis_failure_render">The interface failed to render</string>
-    <string name="cordis_failure_other">The run failed</string>
-    <string name="cordis_details">Details</string>
-    <string name="cordis_collapse">Collapse</string>
-    <string name="cordis_fact_status">Status</string>
-    <string name="cordis_fact_chat">Conversation</string>
-    <string name="cordis_fact_makeup">Contents</string>
-    <string name="cordis_untitled_chat">Untitled conversation</string>
-    <string name="cordis_version_count">%1$d versions</string>
-    <string name="cordis_makeup_both">Backend and interface</string>
-    <string name="cordis_makeup_host">Backend only</string>
-    <string name="cordis_makeup_client">Interface only</string>
     <string name="cordis_open_interface">Open plugin interface</string>
-    <string name="cordis_interface_unavailable">The Host has not placed this plugin\'s interface yet. Approve and run it from its conversation first.</string>
-    <string name="cordis_remove_title">Remove %1$s?</string>
-    <string name="cordis_remove_one">The plugin and its saved version will be removed from this Host.</string>
-    <string name="cordis_remove_versions">The plugin and all %1$d saved versions will be removed from this Host.</string>
 </resources>

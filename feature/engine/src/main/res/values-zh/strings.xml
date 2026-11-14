@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_ns_default_model">默认模型</string>
+    <string name="settings_ns_default_preset">默认预设</string>
+    <string name="settings_ns_agent">智能体</string>
+    <string name="settings_ns_subagent">子代理</string>
+    <string name="settings_ns_subagent_models">子代理模型</string>
+    <string name="settings_ns_deep_seek_model">DeepSeek 模型</string>
+    <string name="settings_ns_account_model">DeepSeek 账号模型</string>
+    <string name="settings_ns_custom_models">自定义模型服务</string>
+    <string name="settings_ns_network">联网</string>
+    <string name="settings_ns_research">文件理解与联网研究</string>
+    <string name="settings_ns_web_search">联网搜索</string>
+    <string name="settings_ns_search_api">联网搜索接口</string>
+    <string name="settings_ns_commands">命令执行</string>
+    <string name="settings_ns_permissions">权限</string>
+    <string name="settings_ns_chat_log">对话日志</string>
+    <string name="settings_ns_thinking_translation">思考翻译</string>
+    <string name="settings_ns_translation">翻译</string>
+    <string name="settings_ns_language">语言</string>
+    <string name="settings_ns_web_appearance">网页版外观</string>
+    <string name="settings_ns_web_chat">网页版对话</string>
+    <string name="settings_ns_web_input">网页版输入</string>
+    <string name="settings_ns_web_settings">网页版设置</string>
+    <string name="settings_ns_web_general">网页版通用</string>
+    <string name="settings_ns_auto_review">自动审查</string>
+    <string name="settings_ns_agent_team">智能体团队</string>
+    <string name="plugin_panels_empty">暂无可用的插件面板。</string>
+</resources>

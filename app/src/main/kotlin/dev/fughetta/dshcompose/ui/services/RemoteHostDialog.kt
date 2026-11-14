@@ -15,6 +15,7 @@ import androidx.compose.ui.text.input.TransformedText
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import dev.fughetta.dshcompose.R
+import dev.fughetta.dshcompose.core.designsystem.R as CoreDesignsystemR
 import dev.fughetta.dshcompose.domain.hosts.HostPairing
 import dev.fughetta.dshcompose.domain.hosts.hostServiceUrl
 import dev.fughetta.dshcompose.ui.*
@@ -93,7 +94,7 @@ fun RemoteHostDialog(state: AppState, onAction: (AppAction) -> Unit) {
                 enabled = !state.remoteHostsBusy,
                 onClick = { onAction(AppAction.CloseRemoteHost) },
             ) {
-                Text(stringResource(R.string.cancel))
+                Text(stringResource(CoreDesignsystemR.string.cancel))
             }
         },
     )

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="phone_controls_app_details">Open App details</string>
+    <string name="phone_main_unavailable">Main-screen control is currently unavailable. Use background control for phone tasks.</string>
+</resources>

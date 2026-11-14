@@ -14,6 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation3.runtime.NavKey
 import dev.fughetta.dshcompose.R
+import dev.fughetta.dshcompose.core.designsystem.R as CoreDesignsystemR
 import dev.fughetta.dshcompose.domain.media.*
 import dev.fughetta.dshcompose.domain.nativeplugins.*
 import dev.fughetta.dshcompose.domain.sessions.*
@@ -155,7 +156,9 @@ internal fun androidx.navigation3.runtime.EntryProviderScope<NavKey>.settingsEnt
             containerColor = Color.Transparent,
             topBar = {
                 TopAppBar(
-                    title = { Text(stringResource(R.string.navigation_native_plugins)) },
+                    title = {
+                        Text(stringResource(CoreDesignsystemR.string.navigation_native_plugins))
+                    },
                     navigationIcon = { UpButton() },
                 )
             },

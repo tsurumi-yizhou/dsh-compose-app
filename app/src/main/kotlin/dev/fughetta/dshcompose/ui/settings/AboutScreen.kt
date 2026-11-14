@@ -13,6 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dev.fughetta.dshcompose.BuildConfig
 import dev.fughetta.dshcompose.R
+import dev.fughetta.dshcompose.core.designsystem.R as CoreDesignsystemR
 import dev.fughetta.dshcompose.ui.ReadablePane
 import dev.fughetta.dshcompose.ui.UpButton
 import dev.fughetta.dshcompose.ui.adaptive.SettingsCardGroup
@@ -28,7 +29,7 @@ internal fun AboutScreen(onLicenses: () -> Unit) {
         containerColor = Color.Transparent,
         topBar = {
             TopAppBar(
-                title = { Text(stringResource(R.string.about_title)) },
+                title = { Text(stringResource(CoreDesignsystemR.string.about_title)) },
                 navigationIcon = { UpButton() },
             )
         },
@@ -70,7 +71,7 @@ internal fun AboutScreen(onLicenses: () -> Unit) {
                     )
                     SettingsRowDivider(16.dp)
                     SettingsRow(
-                        title = stringResource(R.string.open_source_licenses),
+                        title = stringResource(CoreDesignsystemR.string.open_source_licenses),
                         chevron = true,
                         onClick = onLicenses,
                     )

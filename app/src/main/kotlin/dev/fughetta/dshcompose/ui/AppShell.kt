@@ -30,9 +30,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable internal data class SessionDetail(val id: String) : NavKey
 
-/** Rows from the top of the loaded transcript at which the next older page starts loading. */
-internal const val HISTORY_PREFETCH_ROWS = 8
-
 @Serializable internal data object About : NavKey
 
 @Serializable internal data object Licenses : NavKey

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="overlay_stopped">Stopped</string>
+    <string name="overlay_resume_description">Resume DSH’s actions</string>
+    <string name="overlay_pause_description">Pause DSH’s actions</string>
+    <string name="overlay_steer_hint">Steer: tell DSH what to change…</string>
+    <string name="overlay_send">Send</string>
+    <string name="overlay_steer_sent">Sent to DSH: %1$s</string>
+    <string name="overlay_first_app">First action in “%1$s”</string>
+    <string name="overlay_action_title">DSH wants to do this</string>
+    <string name="overlay_waiver_hint">Allow the remaining steps in this task. Passwords, payments, banking and system settings stay blocked. No choice in 30 seconds means Decline</string>
+    <string name="overlay_timeout_hint">No choice in 30 seconds means Decline</string>
+    <string name="overlay_allow_remaining">Allow for task</string>
+    <string name="overlay_allow_app_task">Allow “%1$s” for task</string>
+    <string name="overlay_allow_this_app_task">Allow app for task</string>
+    <string name="overlay_allow_step">Allow this step</string>
+    <string name="overlay_handoff_title">Your turn</string>
+    <string name="overlay_handoff_hint">Tap Continue when you’re done. DSH will take over.</string>
+    <string name="overlay_unlocked">Limits lifted</string>
+    <string name="overlay_unlocked_description">Limits lifted. Tap to review.</string>
+    <string name="overlay_time_remaining">%1$s remaining</string>
+    <string name="overlay_window_title">DSH Phone control</string>
+    <plurals name="overlay_seconds">
+        <item quantity="one">%1$d second</item>
+        <item quantity="other">%1$d seconds</item>
+    </plurals>
+    <plurals name="overlay_seconds_remaining">
+        <item quantity="one">%1$d second remaining</item>
+        <item quantity="other">%1$d seconds remaining</item>
+    </plurals>
+    <string name="overlay_probe_confirm">Tap “WLAN” in “Settings”</string>
+    <string name="overlay_probe_password">Enter your sign-in password</string>
+    <string name="overlay_probe_injection">Input test: this step must not be allowed automatically</string>
+    <string name="overlay_probe_app">Test</string>
+    <string name="phone_availability_disconnected">DSH’s accessibility service isn’t connected. Turn on “DSH Phone control” in Settings → Accessibility.</string>
+    <string name="phone_availability_screen_off">The screen is off. Turn it on and unlock to let DSH control the phone.</string>
+    <string name="phone_availability_locked">The phone is locked. Unlock to continue.</string>
+    <string name="phone_a11y_unavailable">Accessibility is unavailable.</string>
+    <string name="phone_read_timeout">Reading the screen timed out.</string>
+</resources>

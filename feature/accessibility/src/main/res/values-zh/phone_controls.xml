@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="phone_controls_test_screen">读取当前屏幕</string>
+    <string name="phone_controls_accessibility">无障碍服务</string>
+    <string name="phone_controls_accessibility_help">请在系统无障碍设置中开启 dsh-compose。此服务可读取屏幕内容并执行手势。</string>
+    <string name="phone_controls_restricted_help">如果系统阻止开启，请进入应用详情，在菜单中允许受限设置，再返回无障碍设置。</string>
+    <string name="phone_controls_overlay_permission">显示在其他应用上层</string>
+    <string name="phone_screen_current">当前屏幕</string>
+    <string name="phone_screen_copy">复制</string>
+    <string name="phone_screen_empty">（屏幕上没有可读文字）</string>
+    <string name="phone_screen_read_note">这是模型会看到的内容。这次读取没有发给模型。</string>
+    <string name="a11y_restore_title">自动恢复无障碍</string>
+    <string name="a11y_restore_on">已授权</string>
+    <string name="a11y_restore_notice">开启后，在系统设置里关掉无障碍会被自动打开；要关闭手机操控，请在 DSH Compose 里关。</string>
+    <string name="a11y_restore_force_stop">被强制停止后，重新打开 DSH Compose 才能恢复。</string>
+    <string name="a11y_restore_root_note">通过已授权的 root 连接，只授予这一项权限。</string>
+    <string name="a11y_restore_setup">配置 Shizuku 或无线调试</string>
+    <string name="a11y_restore_grant">授权并开启</string>
+    <string name="a11y_restore_grant_shizuku">通过 Shizuku 授予</string>
+    <string name="a11y_restore_grant_shizuku_permission">先授权 Shizuku，再授予权限</string>
+    <string name="a11y_restore_grant_adb">通过自连 ADB 授予</string>
+    <string name="a11y_restore_computer">也可以连接电脑，执行一次：</string>
+    <string name="a11y_restore_copy">复制授权命令</string>
+    <string name="a11y_restore_copied">授权命令已复制</string>
+    <string name="phone_controls_keeper_help">允许 dsh-compose 在系统停止无障碍服务后尝试恢复，需要安全设置权限。</string>
+</resources>

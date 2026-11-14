@@ -15,6 +15,7 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "dsh-compose"
+
 // UI and application assembly.
 include(":app")
 
@@ -27,4 +28,23 @@ include(
     ":data:local",
     ":data:protocol",
     ":data:engine",
+)
+
+// Shared infrastructure, feature contracts and feature implementations.
+include(
+    ":core:platform",
+    ":core:designsystem",
+    ":core:phone",
+    ":feature:phone:api",
+    ":feature:providers:api",
+    ":feature:engine:api",
+    ":feature:files:api",
+    ":feature:chat:api",
+    ":feature:shell:api",
+    ":feature:phone",
+    ":feature:providers",
+    ":feature:engine",
+    ":feature:files",
+    ":feature:chat",
+    ":feature:accessibility",
 )

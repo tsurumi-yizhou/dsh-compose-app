@@ -1,33 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="agents_lineage">子代理</string>
-    <string name="agents_members">团队成员</string>
-    <string name="agents_tasks">任务看板</string>
-    <string name="agents_messages">团队消息</string>
-    <string name="agents_offline">请连接主机查看代理。</string>
-    <string name="agents_select_session">请先打开一个对话。</string>
-    <string name="agents_refresh">刷新</string>
-    <string name="agents_open_parent">打开上级对话</string>
-    <string name="agents_no_children">此对话暂无子代理。</string>
-    <string name="agents_open">打开对话</string>
-    <string name="agents_interrupt">中断</string>
-    <string name="agents_no_team">此对话暂无代理团队。</string>
-    <string name="agents_enable_team">启用代理团队</string>
-    <string name="agents_running">运行中</string>
-    <string name="agents_task_owner">负责人：%1$s</string>
-    <string name="agents_blocked_by">依赖任务：%1$s</string>
-    <string name="agents_write_scopes">写入范围：%1$s</string>
-    <string name="agents_load_messages">刷新团队近期消息</string>
-    <string name="agents_incomplete">部分成员的消息未能读取：%1$s</string>
     <string name="agents_restart_required">主机要求重启引擎以应用此更改。</string>
     <string name="agents_failed">主机未能完成代理操作（%1$s）。</string>
-    <string name="agents_once">一次性</string>
-    <string name="agents_continuable">可续接</string>
-    <string name="agents_external">外部执行</string>
-    <string name="agents_unknown">模式未确定</string>
-    <string name="agents_completed">已完成</string>
-    <string name="agents_failure">失败</string>
-    <string name="agents_preparing">准备中</string>
-    <string name="agents_pending">待处理</string>
-    <string name="agents_idle">空闲</string>
 </resources>

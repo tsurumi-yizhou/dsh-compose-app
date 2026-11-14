@@ -1,0 +1,9 @@
+<resources>
+    <string name="engine_phase_missing">Not installed</string>
+    <string name="engine_phase_installing">Installing</string>
+    <string name="engine_phase_ready">Installed, stopped</string>
+    <string name="engine_phase_starting">Starting</string>
+    <string name="engine_phase_running">Running</string>
+    <string name="engine_phase_stopping">Stopping</string>
+    <string name="engine_phase_error">Failed</string>
+</resources>

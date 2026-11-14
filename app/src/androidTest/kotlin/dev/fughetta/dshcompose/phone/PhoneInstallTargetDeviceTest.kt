@@ -2,7 +2,7 @@ package dev.fughetta.dshcompose.phone
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import dev.fughetta.dshcompose.R
+import dev.fughetta.dshcompose.core.designsystem.R as CoreDesignsystemR
 import dev.fughetta.dshcompose.data.settings.localPreferences
 import dev.fughetta.dshcompose.i18n.AppStrings
 import org.junit.Assert.*
@@ -50,7 +50,11 @@ class PhoneInstallTargetDeviceTest {
             assertEquals("INSTALL_DEVICE_MISMATCH", rejected.value.text)
             assertTrue(rejected.value.isError)
             assertFalse(ApkInstallGate.active)
-            for (message in listOf(R.string.phone_install_new, R.string.phone_install_update)) {
+            for (message in
+                listOf(
+                    CoreDesignsystemR.string.phone_install_new,
+                    CoreDesignsystemR.string.phone_install_update,
+                )) {
                 val text =
                     AppStrings.get(
                         app,

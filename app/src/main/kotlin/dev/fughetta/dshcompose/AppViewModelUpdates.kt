@@ -1,6 +1,5 @@
 package dev.fughetta.dshcompose
 
-import dev.fughetta.dshcompose.R as UiR
 import dev.fughetta.dshcompose.appearance.*
 import dev.fughetta.dshcompose.domain.commands.*
 import dev.fughetta.dshcompose.domain.media.*
@@ -44,7 +43,7 @@ internal fun AppViewModel.applyShellPreferences(
     mutableState.update {
         it.copy(
             shellPrefs = view.preferences ?: it.shellPrefs,
-            error = if (failed) AppStrings.get(app, UiR.string.settings_unavailable) else it.error,
+            error = if (failed) AppStrings.get(app, R.string.settings_unavailable) else it.error,
         )
     }
 }
@@ -70,8 +69,7 @@ internal fun AppViewModel.applySettings(
             theme = settings?.theme ?: state.theme,
             dynamicColor = settings?.dynamicColor ?: state.dynamicColor,
             foldCompletedTurns = settings?.foldCompletedTurns ?: state.foldCompletedTurns,
-            error =
-                if (failed) AppStrings.get(app, UiR.string.settings_unavailable) else state.error,
+            error = if (failed) AppStrings.get(app, R.string.settings_unavailable) else state.error,
         )
     }
 }

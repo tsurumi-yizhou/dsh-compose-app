@@ -1,0 +1,9 @@
+<resources>
+    <string name="engine_phase_missing">未安装</string>
+    <string name="engine_phase_installing">正在安装</string>
+    <string name="engine_phase_ready">已安装，未启动</string>
+    <string name="engine_phase_starting">正在启动</string>
+    <string name="engine_phase_running">运行中</string>
+    <string name="engine_phase_stopping">正在停止</string>
+    <string name="engine_phase_error">失败</string>
+</resources>

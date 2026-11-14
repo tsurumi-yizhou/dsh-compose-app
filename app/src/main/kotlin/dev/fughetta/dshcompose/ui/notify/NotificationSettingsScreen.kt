@@ -17,6 +17,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import dev.fughetta.dshcompose.R
+import dev.fughetta.dshcompose.core.designsystem.R as CoreDesignsystemR
 import dev.fughetta.dshcompose.ui.ReadablePane
 import dev.fughetta.dshcompose.ui.Spacing
 import dev.fughetta.dshcompose.ui.SwitchListItem
@@ -62,7 +63,7 @@ fun NotificationSettingsScreen(
         containerColor = Color.Transparent,
         topBar = {
             TopAppBar(
-                title = { Text(stringResource(R.string.navigation_notifications)) },
+                title = { Text(stringResource(CoreDesignsystemR.string.navigation_notifications)) },
                 navigationIcon = { UpButton() },
             )
         },

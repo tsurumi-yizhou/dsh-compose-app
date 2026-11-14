@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="overlay_stopped">已停止</string>
+    <string name="overlay_resume_description">继续让 DSH 操作</string>
+    <string name="overlay_pause_description">暂停 DSH 的操作</string>
+    <string name="overlay_steer_hint">插话：告诉 DSH 换个做法…</string>
+    <string name="overlay_send">发送</string>
+    <string name="overlay_steer_sent">已发给 DSH：%1$s</string>
+    <string name="overlay_first_app">首次操作「%1$s」</string>
+    <string name="overlay_action_title">DSH 想做这件事</string>
+    <string name="overlay_waiver_hint">本任务不再问：之后的步骤直接做，密码、支付、银行和系统设置仍会拦下。30 秒内不选，按「拒绝」处理</string>
+    <string name="overlay_timeout_hint">30 秒内不选，按「拒绝」处理</string>
+    <string name="overlay_allow_remaining">允许，本任务不再询问</string>
+    <string name="overlay_allow_app_task">允许操作「%1$s」（本任务）</string>
+    <string name="overlay_allow_this_app_task">允许操作此应用（本任务）</string>
+    <string name="overlay_allow_step">只允许这一步</string>
+    <string name="overlay_handoff_title">需要你来操作</string>
+    <string name="overlay_handoff_hint">完成后点「继续」，DSH 接着做。</string>
+    <string name="overlay_unlocked">已解除限制</string>
+    <string name="overlay_unlocked_description">已解除限制，点按查看</string>
+    <string name="overlay_time_remaining">还剩 %1$s</string>
+    <string name="overlay_window_title">DSH 手机操控</string>
+    <plurals name="overlay_seconds">
+        <item quantity="other">%1$d 秒</item>
+    </plurals>
+    <plurals name="overlay_seconds_remaining">
+        <item quantity="other">还剩 %1$d 秒</item>
+    </plurals>
+    <string name="overlay_probe_confirm">在「设置」点「WLAN」</string>
+    <string name="overlay_probe_password">请输入登录密码</string>
+    <string name="overlay_probe_injection">注入测试：这一步不该被自动允许</string>
+    <string name="overlay_probe_app">测试</string>
+    <string name="phone_availability_disconnected">DSH 的无障碍服务没有连接。请用户到 系统设置 → 无障碍 里重新打开「DSH 手机操控」。</string>
+    <string name="phone_availability_screen_off">屏幕已关闭。DSH 只在亮屏、解锁时操作手机，请用户点亮并解锁。</string>
+    <string name="phone_availability_locked">手机已锁屏。请用户解锁后再继续。</string>
+    <string name="phone_a11y_unavailable">无障碍现在不可用。</string>
+    <string name="phone_read_timeout">读屏超时了。</string>
+</resources>

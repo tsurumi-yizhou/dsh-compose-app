@@ -1,29 +1,29 @@
 package dev.fughetta.dshcompose.notify
 
 import android.content.Context
-import dev.fughetta.dshcompose.R as UiR
+import dev.fughetta.dshcompose.R
 import dev.fughetta.dshcompose.i18n.AppStrings
 import kotlinx.coroutines.*
 
 internal fun notificationWords(app: Context): NotificationWords =
     NotificationWords(
-        untitled = AppStrings.get(app, UiR.string.notification_controls_untitled),
-        publicDone = AppStrings.get(app, UiR.string.notification_controls_public_done),
-        publicApproval = AppStrings.get(app, UiR.string.notification_controls_public_approval),
-        publicQuestion = AppStrings.get(app, UiR.string.notification_controls_public_question),
-        publicStopped = AppStrings.get(app, UiR.string.notification_controls_public_stopped),
-        publicFailed = AppStrings.get(app, UiR.string.notification_controls_public_failed),
-        chipDone = AppStrings.get(app, UiR.string.notification_controls_chip_done),
-        chipFailed = AppStrings.get(app, UiR.string.notification_controls_chip_failed),
-        chipWaiting = AppStrings.get(app, UiR.string.notification_controls_chip_waiting),
-        chipRunning = AppStrings.get(app, UiR.string.notification_controls_chip_running),
-        livePublic = AppStrings.get(app, UiR.string.notification_controls_live_public),
+        untitled = AppStrings.get(app, R.string.notification_controls_untitled),
+        publicDone = AppStrings.get(app, R.string.notification_controls_public_done),
+        publicApproval = AppStrings.get(app, R.string.notification_controls_public_approval),
+        publicQuestion = AppStrings.get(app, R.string.notification_controls_public_question),
+        publicStopped = AppStrings.get(app, R.string.notification_controls_public_stopped),
+        publicFailed = AppStrings.get(app, R.string.notification_controls_public_failed),
+        chipDone = AppStrings.get(app, R.string.notification_controls_chip_done),
+        chipFailed = AppStrings.get(app, R.string.notification_controls_chip_failed),
+        chipWaiting = AppStrings.get(app, R.string.notification_controls_chip_waiting),
+        chipRunning = AppStrings.get(app, R.string.notification_controls_chip_running),
+        livePublic = AppStrings.get(app, R.string.notification_controls_live_public),
         runningText = { others ->
             if (others > 0)
-                AppStrings.get(app, UiR.string.notification_controls_live_running) +
+                AppStrings.get(app, R.string.notification_controls_live_running) +
                     " · " +
-                    AppStrings.get(app, UiR.string.notification_controls_live_more, others)
-            else AppStrings.get(app, UiR.string.notification_controls_live_running)
+                    AppStrings.get(app, R.string.notification_controls_live_more, others)
+            else AppStrings.get(app, R.string.notification_controls_live_running)
         },
     )
 
@@ -90,18 +90,17 @@ internal fun notificationCompletionText(
     when (outcome.kind) {
         "completed" ->
             outcome.reply?.let {
-                AppStrings.get(app, UiR.string.notification_controls_done_reply, it)
-            } ?: AppStrings.get(app, UiR.string.notification_controls_done)
-        "max-tokens" -> AppStrings.get(app, UiR.string.notification_controls_output_limit)
-        "aborted" -> AppStrings.get(app, UiR.string.notification_controls_stopped)
-        "blocked" -> AppStrings.get(app, UiR.string.notification_controls_blocked)
-        "interrupted" -> AppStrings.get(app, UiR.string.notification_controls_interrupted)
+                AppStrings.get(app, R.string.notification_controls_done_reply, it)
+            } ?: AppStrings.get(app, R.string.notification_controls_done)
+        "max-tokens" -> AppStrings.get(app, R.string.notification_controls_output_limit)
+        "aborted" -> AppStrings.get(app, R.string.notification_controls_stopped)
+        "blocked" -> AppStrings.get(app, R.string.notification_controls_blocked)
+        "interrupted" -> AppStrings.get(app, R.string.notification_controls_interrupted)
         else ->
             AppStrings.get(
                 app,
-                if (outcome.code == "MISSING_CREDENTIAL")
-                    UiR.string.notification_controls_missing_key
-                else UiR.string.notification_controls_failed,
+                if (outcome.code == "MISSING_CREDENTIAL") R.string.notification_controls_missing_key
+                else R.string.notification_controls_failed,
             )
     }
 
@@ -109,12 +108,12 @@ internal fun notificationFailureText(app: Context, code: String): String =
     AppStrings.get(
         app,
         when (code) {
-            "notify/save" -> UiR.string.notification_controls_save_failed
-            "notify/settings" -> UiR.string.notification_controls_settings_failed
-            "notify/answer" -> UiR.string.notification_controls_answer_failed
-            "notify/stop" -> UiR.string.notification_controls_stop_failed
-            "notify/post" -> UiR.string.notification_controls_post_failed
-            "notify/nowbar" -> UiR.string.notification_controls_nowbar_failed
-            else -> UiR.string.notification_controls_read_failed
+            "notify/save" -> R.string.notification_controls_save_failed
+            "notify/settings" -> R.string.notification_controls_settings_failed
+            "notify/answer" -> R.string.notification_controls_answer_failed
+            "notify/stop" -> R.string.notification_controls_stop_failed
+            "notify/post" -> R.string.notification_controls_post_failed
+            "notify/nowbar" -> R.string.notification_controls_nowbar_failed
+            else -> R.string.notification_controls_read_failed
         },
     )

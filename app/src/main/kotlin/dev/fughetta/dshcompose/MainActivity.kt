@@ -22,6 +22,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import dev.fughetta.dshcompose.attachments.importPickedFiles
+import dev.fughetta.dshcompose.core.designsystem.R as CoreDesignsystemR
 import dev.fughetta.dshcompose.i18n.AppStrings
 import dev.fughetta.dshcompose.launch.LaunchThemeSync
 import dev.fughetta.dshcompose.runtime.LaunchStart
@@ -423,7 +424,7 @@ class MainActivity : ComponentActivity() {
                                 startActivity(
                                     Intent.createChooser(
                                         intent,
-                                        getString(R.string.jobs_share_output),
+                                        getString(CoreDesignsystemR.string.jobs_share_output),
                                     ),
                                 )
                             } catch (_: Exception) {

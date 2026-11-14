@@ -4,6 +4,7 @@ package dev.fughetta.dshcompose.ui.uiconfig
 // kinds, same Chinese words. check.mjs runs only when `node` is on PATH.
 
 import dev.fughetta.dshcompose.R
+import dev.fughetta.dshcompose.core.designsystem.R as DesignR
 import java.io.File
 import java.util.concurrent.TimeUnit
 import javax.xml.parsers.DocumentBuilderFactory
@@ -125,27 +126,31 @@ class UiConfigParserTest {
     private companion object {
         /** The Chinese strings of values-zh/ui_config.xml, keyed by resource id. */
         val zh: UiStrings by lazy {
-            val doc =
-                DocumentBuilderFactory.newInstance()
-                    .newDocumentBuilder()
-                    .parse(File("src/main/res/values-zh/ui_config.xml"))
+            val documents =
+                listOf(
+                        File("src/main/res/values-zh/ui_config.xml"),
+                        File("../core/designsystem/src/main/res/values-zh/ui_config.xml"),
+                    )
+                    .map { DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(it) }
             val strings = mutableMapOf<String, String>()
             val plurals = mutableMapOf<String, String>()
             fun unescape(s: String) =
                 s.replace("\\'", "'").replace("\\\"", "\"").replace("\\n", "\n")
-            val stringNodes = doc.getElementsByTagName("string")
-            for (i in 0 until stringNodes.length) {
-                val e = stringNodes.item(i) as Element
-                strings[e.getAttribute("name")] = unescape(e.textContent)
-            }
-            val pluralNodes = doc.getElementsByTagName("plurals")
-            for (i in 0 until pluralNodes.length) {
-                val e = pluralNodes.item(i) as Element
-                plurals[e.getAttribute("name")] =
-                    unescape(e.getElementsByTagName("item").item(0).textContent)
+            for (doc in documents) {
+                val stringNodes = doc.getElementsByTagName("string")
+                for (i in 0 until stringNodes.length) {
+                    val e = stringNodes.item(i) as Element
+                    strings[e.getAttribute("name")] = unescape(e.textContent)
+                }
+                val pluralNodes = doc.getElementsByTagName("plurals")
+                for (i in 0 until pluralNodes.length) {
+                    val e = pluralNodes.item(i) as Element
+                    plurals[e.getAttribute("name")] =
+                        unescape(e.getElementsByTagName("item").item(0).textContent)
+                }
             }
             fun names(type: Class<*>) = type.fields.associate { it.getInt(null) to it.name }
-            val stringNames = names(R.string::class.java)
+            val stringNames = names(R.string::class.java) + names(DesignR.string::class.java)
             val pluralNames = names(R.plurals::class.java)
             UiStrings(
                 resolveText = { id, args ->

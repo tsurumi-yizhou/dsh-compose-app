@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="provider_auto_models_help">Models are fetched automatically when you save. Leave the key empty to use the saved key for an unchanged endpoint.</string>
+    <string name="provider_fetch_save">Fetch models and save</string>
+</resources>

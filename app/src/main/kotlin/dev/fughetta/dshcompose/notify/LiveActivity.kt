@@ -18,6 +18,7 @@ import android.provider.Settings
 import dev.fughetta.dshcompose.MainActivity
 import dev.fughetta.dshcompose.R
 import dev.fughetta.dshcompose.appearance.AppearanceStore
+import dev.fughetta.dshcompose.core.designsystem.R as CoreDesignsystemR
 import dev.fughetta.dshcompose.di.localPreferences
 import dev.fughetta.dshcompose.i18n.AppStrings
 import dev.fughetta.dshcompose.phone.PhoneControl
@@ -184,7 +185,7 @@ object LiveActivity {
             phoneTask = task.id
             phoneSince = System.currentTimeMillis()
         }
-        val title = AppStrings.get(ctx, R.string.phone_running)
+        val title = AppStrings.get(ctx, CoreDesignsystemR.string.phone_running)
         return LiveContent(
             kind = LiveContent.Kind.PHONE,
             title = title,
@@ -205,7 +206,7 @@ object LiveActivity {
         val color = AppearanceStore.notificationColor(ctx)
         val builder =
             Notification.Builder(ctx, CHANNEL)
-                .setSmallIcon(R.drawable.ic_stat_dsh)
+                .setSmallIcon(CoreDesignsystemR.drawable.ic_stat_dsh)
                 .setColor(color)
                 .setContentTitle(c.title)
                 .setContentText(c.text.ifEmpty { null })
@@ -278,7 +279,7 @@ object LiveActivity {
     private fun publicVersion(ctx: Context, c: LiveContent, color: Int): Notification {
         val builder =
             Notification.Builder(ctx, CHANNEL)
-                .setSmallIcon(R.drawable.ic_stat_dsh)
+                .setSmallIcon(CoreDesignsystemR.drawable.ic_stat_dsh)
                 .setColor(color)
                 .setContentTitle(AppStrings.APP_NAME)
                 .setContentText(c.publicText)

@@ -3,7 +3,7 @@ package dev.fughetta.dshcompose.notify
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.fughetta.dshcompose.R as UiR
+import dev.fughetta.dshcompose.R
 import dev.fughetta.dshcompose.domain.chat.ToolPayload
 import dev.fughetta.dshcompose.domain.hosts.ConnectionGeneration
 import dev.fughetta.dshcompose.domain.messages.*
@@ -341,7 +341,7 @@ class NotificationsViewModel(
                 call?.exactText?.let { NotificationPrivacy.snippet(it, 120) }
                     ?: AppStrings.get(
                         app,
-                        UiR.string.notification_controls_approval_tool,
+                        R.string.notification_controls_approval_tool,
                         NotificationPrivacy.snippet(request.text("toolName"), 80).orEmpty(),
                     )
             else
@@ -350,7 +350,7 @@ class NotificationsViewModel(
                     ?.firstOrNull()
                     ?.let { (it as? ToolPayload.Obj)?.text("question") }
                     ?.let { NotificationPrivacy.snippet(it) }
-                    ?: AppStrings.get(app, UiR.string.notification_controls_question)
+                    ?: AppStrings.get(app, R.string.notification_controls_question)
         val alert =
             Alert(
                 NotificationTarget(host.id, pending.root, pending.eventId),

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="composer_add">Add attachment or reference</string>
+    <string name="composer_location_request">Get current location</string>
+    <string name="composer_location_wait">Getting location…</string>
+    <string name="composer_location_failed">Location unavailable. Check location permission and system location settings, then retry.</string>
+    <string name="composer_location_add">Insert into draft</string>
+    <string name="composer_location_help">Get your current location and review the coordinates before adding them to your message.</string>
+</resources>

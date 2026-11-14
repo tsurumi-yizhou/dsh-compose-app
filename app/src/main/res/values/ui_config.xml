@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="ui_config_file_too_large">File exceeds 64 KiB</string>
     <string name="ui_config_root_not_object">Top level must be an object</string>
@@ -27,7 +28,6 @@
         <item quantity="other">Up to %1$d items, extras ignored</item>
     </plurals>
     <string name="ui_config_value_noun">value</string>
-    <string name="ui_config_unsupported_value">Unsupported %1$s “%2$s”</string>
     <string name="ui_config_header_item">Expected a button ID or object</string>
     <string name="ui_config_header_id">IDs can use letters, numbers, and -, starting with a lowercase letter</string>
     <string name="ui_config_id_taken">Duplicate ID</string>
@@ -53,7 +53,6 @@
     <string name="ui_config_button_noun">button</string>
     <string name="ui_config_icon_noun">icon</string>
     <string name="ui_config_not_text_file">Not a text file</string>
-    <string name="ui_json_position">Line %1$d, column %2$d: %3$s</string>
     <string name="ui_json_empty_file">File is empty</string>
     <string name="ui_json_extra_content">Extra content at the end</string>
     <string name="ui_json_incomplete_file">File is incomplete</string>
@@ -86,12 +85,10 @@
     <string name="ui_config_dropped_heading">Not applied</string>
     <string name="ui_config_notes_heading">Warnings</string>
     <string name="ui_config_applied_heading">Applied</string>
-    <string name="ui_config_value_options">Unsupported %1$s “%2$s”, options: %3$s</string>
     <string name="ui_config_from_file">From ui.json</string>
     <string name="ui_config_restore_default">Reset to default</string>
     <string name="ui_config_title">UI config</string>
     <string name="ui_config_no_file">No ui.json</string>
     <string name="ui_config_skill_missing">Skill not installed</string>
-    <string name="ui_config_list_separator">", "</string>
     <string name="ui_config_location">Location</string>
 </resources>

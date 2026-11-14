@@ -26,8 +26,7 @@ import dev.fughetta.dshcompose.ui.notify.NowBarState
  * One UI takes once the switch is on.
  *
  * Everything here is a read except [enable], which writes that one setting when the person tapped
- * to do exactly that and the app holds `WRITE_SECURE_SETTINGS` (the same grant
- * [dev.fughetta.dshcompose.phone.a11y.A11yKeeper] relies on).
+ * to do exactly that and the app holds `WRITE_SECURE_SETTINGS`.
  */
 object NowBar {
     /** `Settings.Secure` key behind Developer options → "Live notifications for all apps". */

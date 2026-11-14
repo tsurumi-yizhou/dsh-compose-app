@@ -50,8 +50,16 @@ jobs:
       - name: Kotlin tests and APK
         run: |
           variant="${FLAVOR^}"
-          ./gradlew --stacktrace :domain:test :data:testDebugUnitTest :data:local:testDebugUnitTest :data:protocol:test \
-            ":data:engine:test${variant}DebugUnitTest" ":app:test${variant}DebugUnitTest" ":app:assemble${variant}Debug"
+          ./gradlew --stacktrace :domain:test \
+            :core:platform:testDebugUnitTest :core:designsystem:testDebugUnitTest :core:phone:testDebugUnitTest \
+            :feature:phone:api:testDebugUnitTest :feature:providers:api:testDebugUnitTest \
+            :feature:engine:api:testDebugUnitTest :feature:files:api:testDebugUnitTest \
+            :feature:chat:api:testDebugUnitTest :feature:shell:api:testDebugUnitTest \
+            :feature:phone:testDebugUnitTest :feature:providers:testDebugUnitTest \
+            :feature:files:testDebugUnitTest :feature:chat:testDebugUnitTest :feature:accessibility:testDebugUnitTest \
+            :data:testDebugUnitTest :data:local:testDebugUnitTest :data:protocol:test \
+            ":data:engine:test${variant}DebugUnitTest" ":feature:engine:test${variant}DebugUnitTest" \
+            ":app:test${variant}DebugUnitTest" ":app:assemble${variant}Debug"
       - name: Android runtime tests
         run: |
           prefix="$RUNNER_TEMP/android-engine-tests"

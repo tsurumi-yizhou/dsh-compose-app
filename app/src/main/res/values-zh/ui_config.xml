@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="ui_config_file_too_large">文件超过 64 KiB</string>
     <string name="ui_config_root_not_object">顶层必须是对象</string>
@@ -24,7 +25,6 @@
         <item quantity="other">最多 %1$d 个，多出的已忽略</item>
     </plurals>
     <string name="ui_config_value_noun">值</string>
-    <string name="ui_config_unsupported_value">不支持的%1$s「%2$s」</string>
     <string name="ui_config_header_item">应该是按钮 id 或对象</string>
     <string name="ui_config_header_id">id 只能用字母、数字和 -，以小写字母开头</string>
     <string name="ui_config_id_taken">id 重复</string>
@@ -50,7 +50,6 @@
     <string name="ui_config_button_noun">按钮</string>
     <string name="ui_config_icon_noun">图标</string>
     <string name="ui_config_not_text_file">不是文本文件</string>
-    <string name="ui_json_position">第 %1$d 行第 %2$d 列：%3$s</string>
     <string name="ui_json_empty_file">文件是空的</string>
     <string name="ui_json_extra_content">后面还有多余的内容</string>
     <string name="ui_json_incomplete_file">文件不完整</string>
@@ -81,12 +80,10 @@
     <string name="ui_config_dropped_heading">没生效</string>
     <string name="ui_config_notes_heading">提示</string>
     <string name="ui_config_applied_heading">已应用</string>
-    <string name="ui_config_value_options">不支持的%1$s「%2$s」，可选：%3$s</string>
     <string name="ui_config_from_file">来自 ui.json</string>
     <string name="ui_config_restore_default">恢复默认</string>
     <string name="ui_config_title">界面配置</string>
     <string name="ui_config_no_file">没有 ui.json</string>
     <string name="ui_config_skill_missing">未安装技能</string>
-    <string name="ui_config_list_separator">、</string>
     <string name="ui_config_location">位置</string>
 </resources>

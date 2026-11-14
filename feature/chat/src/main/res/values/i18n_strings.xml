@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="drawer_updated_at">Updated %1$s</string>
+    <string name="session_search_keyboard_hint">↑↓ select · Enter open · Esc close</string>
+</resources>

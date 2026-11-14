@@ -2,7 +2,7 @@ package dev.fughetta.dshcompose.connection
 
 import androidx.lifecycle.viewModelScope
 import dev.fughetta.dshcompose.*
-import dev.fughetta.dshcompose.R as UiR
+import dev.fughetta.dshcompose.R
 import dev.fughetta.dshcompose.appearance.*
 import dev.fughetta.dshcompose.attachments.importShares
 import dev.fughetta.dshcompose.domain.hosts.ConnectedHost
@@ -192,23 +192,23 @@ internal fun AppViewModel.saveRemoteHost(action: AppAction.SaveRemoteHost): Unit
                     when (error) {
                         is dev.fughetta.dshcompose.protocol.HostRemoteException ->
                             when (error.code) {
-                                "pairing/invalid" -> UiR.string.compose_pair_invalid
+                                "pairing/invalid" -> R.string.compose_pair_invalid
                                 "pairing/expired",
-                                "pairing/locked" -> UiR.string.compose_pair_expired
-                                "pairing/rate-limited" -> UiR.string.compose_pair_limited
-                                "device/refused" -> UiR.string.compose_pair_refused
-                                else -> UiR.string.compose_host_failed
+                                "pairing/locked" -> R.string.compose_pair_expired
+                                "pairing/rate-limited" -> R.string.compose_pair_limited
+                                "device/refused" -> R.string.compose_pair_refused
+                                else -> R.string.compose_host_failed
                             }
                         is dev.fughetta.dshcompose.protocol.HostHttpException ->
                             when (error.status) {
-                                401 -> UiR.string.compose_pair_expired
-                                403 -> UiR.string.compose_pair_refused
-                                429 -> UiR.string.compose_pair_limited
-                                else -> UiR.string.compose_host_failed
+                                401 -> R.string.compose_pair_expired
+                                403 -> R.string.compose_pair_refused
+                                429 -> R.string.compose_pair_limited
+                                else -> R.string.compose_host_failed
                             }
                         is dev.fughetta.dshcompose.protocol.HostTransportException ->
-                            UiR.string.compose_pair_unreachable
-                        else -> UiR.string.compose_pair_save_failed
+                            R.string.compose_pair_unreachable
+                        else -> R.string.compose_pair_save_failed
                     }
                 mutableState.update {
                     it.copy(
@@ -543,7 +543,7 @@ internal fun AppViewModel.changeConnection(
                                 error =
                                     AppStrings.get(
                                         getApplication(),
-                                        UiR.string.compose_host_failed,
+                                        R.string.compose_host_failed,
                                     ),
                             )
                         }

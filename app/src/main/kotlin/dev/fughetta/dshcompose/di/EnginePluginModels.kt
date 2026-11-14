@@ -39,7 +39,27 @@ internal fun AppViewModel.createEngineControls() = run {
     ownedModel {
         dev.fughetta.dshcompose.engineui.EngineControlsViewModel(
             app,
-            null,
+            runtime = runtime,
+            beginInstall = {
+                app.startForegroundService(
+                    android.content
+                        .Intent(app, dev.fughetta.dshcompose.runtime.EngineService::class.java)
+                        .setAction(dev.fughetta.dshcompose.runtime.EngineService.ACTION_INSTALL),
+                )
+            },
+            finishInstall = { complete ->
+                app.startService(
+                    android.content
+                        .Intent(app, dev.fughetta.dshcompose.runtime.EngineService::class.java)
+                        .setAction(
+                            dev.fughetta.dshcompose.runtime.EngineService.ACTION_INSTALL_DONE,
+                        )
+                        .putExtra(
+                            dev.fughetta.dshcompose.runtime.EngineService.EXTRA_INSTALL_OK,
+                            complete,
+                        ),
+                )
+            },
             phoneStorage = { phoneControls.phoneStorageEnabled },
             hasModelAccess = {
                 localObserver.lease?.generation?.let(deepSeekAccount::identityFor) == true ||

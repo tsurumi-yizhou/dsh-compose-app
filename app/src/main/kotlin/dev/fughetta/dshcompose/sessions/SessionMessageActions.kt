@@ -3,7 +3,7 @@ package dev.fughetta.dshcompose.sessions
 import android.app.Application
 import dev.fughetta.dshcompose.*
 import dev.fughetta.dshcompose.ClientApplication
-import dev.fughetta.dshcompose.R as UiR
+import dev.fughetta.dshcompose.R
 import dev.fughetta.dshcompose.appearance.*
 import dev.fughetta.dshcompose.attachments.importShares
 import dev.fughetta.dshcompose.domain.OperationFailure
@@ -294,7 +294,7 @@ internal suspend fun AppViewModel.sendMessage(
                 else {
                     val hint =
                         getApplication<Application>()
-                            .getString(UiR.string.workspace_uploaded_files_hint)
+                            .getString(R.string.workspace_uploaded_files_hint)
                     listOf(
                             composed.takeIf { it.isNotEmpty() },
                             hint +

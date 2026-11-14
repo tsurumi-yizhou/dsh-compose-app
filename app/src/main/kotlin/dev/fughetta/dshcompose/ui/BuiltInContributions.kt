@@ -1,6 +1,7 @@
 package dev.fughetta.dshcompose.ui
 
 import dev.fughetta.dshcompose.R
+import dev.fughetta.dshcompose.core.designsystem.R as CoreDesignsystemR
 import dev.fughetta.dshcompose.ui.*
 import kotlinx.collections.immutable.persistentListOf
 
@@ -10,7 +11,7 @@ val builtInContributions =
             FeatureContribution(
                 "settings.navigation_notifications",
                 FeaturePlacement.Settings,
-                R.string.navigation_notifications,
+                CoreDesignsystemR.string.navigation_notifications,
                 { FeatureTarget.Page(FeaturePage.Notifications) },
                 section = SettingsSection.General,
             ),
@@ -31,7 +32,7 @@ val builtInContributions =
             FeatureContribution(
                 "settings.providers",
                 FeaturePlacement.Settings,
-                R.string.providers,
+                CoreDesignsystemR.string.providers,
                 { FeatureTarget.Page(FeaturePage.Providers) },
                 section = SettingsSection.Ai,
             ),
@@ -45,35 +46,35 @@ val builtInContributions =
             FeatureContribution(
                 "settings.personalization_title",
                 FeaturePlacement.Settings,
-                R.string.reply_prefs_title,
+                CoreDesignsystemR.string.reply_prefs_title,
                 { FeatureTarget.Page(FeaturePage.Personalization) },
                 section = SettingsSection.Ai,
             ),
             FeatureContribution(
                 "settings.agent_presets",
                 FeaturePlacement.Settings,
-                R.string.agent_presets,
+                CoreDesignsystemR.string.agent_presets,
                 { FeatureTarget.Page(FeaturePage.Presets) },
                 section = SettingsSection.Ai,
             ),
             FeatureContribution(
                 "settings.navigation_phone_controls",
                 FeaturePlacement.Settings,
-                R.string.navigation_phone_controls,
+                CoreDesignsystemR.string.navigation_phone_controls,
                 { FeatureTarget.Page(FeaturePage.Phone) },
                 section = SettingsSection.Capabilities,
             ),
             FeatureContribution(
                 "settings.navigation_plugins",
                 FeaturePlacement.Settings,
-                R.string.navigation_plugins,
+                CoreDesignsystemR.string.navigation_plugins,
                 { FeatureTarget.Page(FeaturePage.Plugins) },
                 section = SettingsSection.Capabilities,
             ),
             FeatureContribution(
                 "settings.navigation_media_settings",
                 FeaturePlacement.Settings,
-                R.string.navigation_media_settings,
+                CoreDesignsystemR.string.navigation_media_settings,
                 {
                     FeatureTarget.Action(
                         AppAction.Media(dev.fughetta.dshcompose.ui.media.MediaAction.Settings),
@@ -84,35 +85,35 @@ val builtInContributions =
             FeatureContribution(
                 "settings.navigation_native_plugins",
                 FeaturePlacement.Settings,
-                R.string.navigation_native_plugins,
+                CoreDesignsystemR.string.navigation_native_plugins,
                 { FeatureTarget.Page(FeaturePage.NativePlugins) },
                 section = SettingsSection.Display,
             ),
             FeatureContribution(
                 "settings.appearance",
                 FeaturePlacement.Settings,
-                R.string.appearance,
+                CoreDesignsystemR.string.appearance,
                 { FeatureTarget.Action(AppAction.OpenAppearance) },
                 section = SettingsSection.Display,
             ),
             FeatureContribution(
                 "settings.quick_panel_title",
                 FeaturePlacement.Settings,
-                R.string.quick_panel_title,
+                CoreDesignsystemR.string.quick_panel_title,
                 { FeatureTarget.Page(FeaturePage.QuickPanel) },
                 section = SettingsSection.Display,
             ),
             FeatureContribution(
                 "settings.navigation_engine_configuration",
                 FeaturePlacement.Settings,
-                R.string.navigation_engine_configuration,
+                CoreDesignsystemR.string.navigation_engine_configuration,
                 { FeatureTarget.Page(FeaturePage.Configuration) },
                 section = SettingsSection.Advanced,
             ),
             FeatureContribution(
                 "settings.navigation_plugin_panels",
                 FeaturePlacement.Settings,
-                R.string.navigation_plugin_panels,
+                CoreDesignsystemR.string.navigation_plugin_panels,
                 { FeatureTarget.Action(AppAction.OpenPluginSeats()) },
                 section = SettingsSection.Tools,
             ),
@@ -130,14 +131,14 @@ val builtInContributions =
             FeatureContribution(
                 "settings.navigation_terminal",
                 FeaturePlacement.Settings,
-                R.string.navigation_terminal,
+                CoreDesignsystemR.string.navigation_terminal,
                 { FeatureTarget.Action(AppAction.OpenTerminal) },
                 section = SettingsSection.Tools,
             ),
             FeatureContribution(
                 "settings.navigation_schedules",
                 FeaturePlacement.Settings,
-                R.string.navigation_schedules,
+                CoreDesignsystemR.string.navigation_schedules,
                 { FeatureTarget.Action(AppAction.OpenSchedules) },
                 section = SettingsSection.Tools,
             ),
@@ -151,14 +152,14 @@ val builtInContributions =
             FeatureContribution(
                 "settings.about",
                 FeaturePlacement.Settings,
-                R.string.about_title,
+                CoreDesignsystemR.string.about_title,
                 { FeatureTarget.Page(FeaturePage.About) },
                 section = SettingsSection.Help,
             ),
             FeatureContribution(
                 "session.transcript_artifacts",
                 FeaturePlacement.SessionContent,
-                R.string.transcript_artifacts,
+                CoreDesignsystemR.string.transcript_artifacts,
                 { session ->
                     session?.let { FeatureTarget.Action(AppAction.OpenSessionArtifacts(session)) }
                 },
@@ -166,7 +167,7 @@ val builtInContributions =
             FeatureContribution(
                 "session.workspace_files",
                 FeaturePlacement.SessionContent,
-                R.string.workspace_files,
+                CoreDesignsystemR.string.workspace_files,
                 { session ->
                     session?.let { FeatureTarget.Action(AppAction.OpenWorkspaceFiles(session)) }
                 },
@@ -174,7 +175,7 @@ val builtInContributions =
             FeatureContribution(
                 "session.session_export_title",
                 FeaturePlacement.SessionContent,
-                R.string.session_export_title,
+                CoreDesignsystemR.string.session_export_title,
                 { session ->
                     session?.let { FeatureTarget.Action(AppAction.OpenSessionExport(session)) }
                 },
@@ -182,25 +183,25 @@ val builtInContributions =
             FeatureContribution(
                 "session.navigation_agents",
                 FeaturePlacement.SessionTools,
-                R.string.navigation_agents,
+                CoreDesignsystemR.string.navigation_agents,
                 { session -> session?.let { FeatureTarget.Action(AppAction.OpenAgents(session)) } },
             ),
             FeatureContribution(
                 "session.skills_title",
                 FeaturePlacement.SessionTools,
-                R.string.skills_title,
+                CoreDesignsystemR.string.skills_title,
                 { session -> session?.let { FeatureTarget.Action(AppAction.OpenSkills(session)) } },
             ),
             FeatureContribution(
                 "session.jobs_title",
                 FeaturePlacement.SessionTools,
-                R.string.jobs_title,
+                CoreDesignsystemR.string.jobs_title,
                 { session -> session?.let { FeatureTarget.Action(AppAction.OpenJobs(session)) } },
             ),
             FeatureContribution(
                 "session.navigation_plugin_panels",
                 FeaturePlacement.SessionTools,
-                R.string.navigation_plugin_panels,
+                CoreDesignsystemR.string.navigation_plugin_panels,
                 { session ->
                     session?.let { FeatureTarget.Action(AppAction.OpenPluginSeats(session)) }
                 },
@@ -208,19 +209,19 @@ val builtInContributions =
             FeatureContribution(
                 "session.navigation_terminal",
                 FeaturePlacement.SessionTools,
-                R.string.navigation_terminal,
+                CoreDesignsystemR.string.navigation_terminal,
                 { session -> FeatureTarget.Action(AppAction.OpenTerminal) },
             ),
             FeatureContribution(
                 "session.navigation_schedules",
                 FeaturePlacement.SessionTools,
-                R.string.navigation_schedules,
+                CoreDesignsystemR.string.navigation_schedules,
                 { session -> FeatureTarget.Action(AppAction.OpenSchedules) },
             ),
             FeatureContribution(
                 "session.permissions_title",
                 FeaturePlacement.SessionManage,
-                R.string.permissions_title,
+                CoreDesignsystemR.string.permissions_title,
                 { session ->
                     session?.let { FeatureTarget.Action(AppAction.OpenPermissions(session)) }
                 },
@@ -258,14 +259,14 @@ val builtInComposerActions =
             id = "app:attachments",
             surface = "composer.toolbar",
             label = { it.getString(R.string.composer_files) },
-            icon = R.drawable.ic_s_doc,
+            icon = CoreDesignsystemR.drawable.ic_s_doc,
             invoke = { AppAction.PickAttachments(it.sessionId) },
             enabled = { !it.readOnly && !it.sending && !it.syncing },
         ),
         AppModuleContribution.ComposerAction(
             id = "app:location",
             surface = "composer.toolbar",
-            label = { it.getString(R.string.composer_location) },
+            label = { it.getString(CoreDesignsystemR.string.composer_location) },
             icon = R.drawable.ic_location,
             invoke = { AppAction.InsertLocation(it.sessionId) },
             enabled = { !it.readOnly && !it.sending && !it.syncing },

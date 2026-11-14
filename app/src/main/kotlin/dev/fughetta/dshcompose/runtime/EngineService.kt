@@ -18,6 +18,7 @@ import android.os.SystemClock
 import dev.fughetta.dshcompose.ClientApplication
 import dev.fughetta.dshcompose.MainActivity
 import dev.fughetta.dshcompose.R
+import dev.fughetta.dshcompose.core.designsystem.R as CoreDesignsystemR
 import dev.fughetta.dshcompose.di.createLocalSessions
 import dev.fughetta.dshcompose.engine.runtime.*
 import dev.fughetta.dshcompose.i18n.AppStrings
@@ -366,7 +367,7 @@ class EngineService : Service() {
                 }
             val notification =
                 Notification.Builder(context, INSTALL_CHANNEL)
-                    .setSmallIcon(R.drawable.ic_stat_dsh)
+                    .setSmallIcon(CoreDesignsystemR.drawable.ic_stat_dsh)
                     .setContentTitle(AppStrings.get(context, title))
                     .setContentText(AppStrings.get(context, text))
                     .setContentIntent(openApp(context, INSTALL_ALERT_ID))
@@ -402,7 +403,7 @@ class EngineService : Service() {
                 )
             val notification =
                 Notification.Builder(context, ALERT_CHANNEL)
-                    .setSmallIcon(R.drawable.ic_stat_dsh)
+                    .setSmallIcon(CoreDesignsystemR.drawable.ic_stat_dsh)
                     .setContentTitle(AppStrings.get(context, R.string.service_stopped_title))
                     .setContentIntent(open)
                     .setAutoCancel(true)
@@ -417,7 +418,7 @@ class EngineService : Service() {
             step: String?,
         ): Notification =
             Notification.Builder(context, CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_stat_dsh)
+                .setSmallIcon(CoreDesignsystemR.drawable.ic_stat_dsh)
                 .setContentTitle(AppStrings.APP_NAME)
                 .setContentText(
                     AppStrings.get(
@@ -521,7 +522,7 @@ class EngineService : Service() {
                 )
             }
             return builder
-                .setSmallIcon(R.drawable.ic_stat_dsh)
+                .setSmallIcon(CoreDesignsystemR.drawable.ic_stat_dsh)
                 .setContentTitle(AppStrings.APP_NAME)
                 .setContentText(phoneLine ?: text)
                 .setOngoing(true)

@@ -1,5 +1,7 @@
 package dev.fughetta.dshcompose.ui.uiconfig
 
+import dev.fughetta.dshcompose.R
+
 // A strict JSON reader for ui.json. kotlinx.serialization would do, except that it gives no line
 // and column for a mistake, silently keeps the last of two equal keys, and cannot tell `1` from
 // `1.0`. The skill's `check.mjs` (app/src/main/assets/skills/dsh-compose-ui/) has a line-for-line
@@ -7,8 +9,6 @@ package dev.fughetta.dshcompose.ui.uiconfig
 // this
 // reader, so both report the same position and words for the same file (UiConfigParserTest runs
 // the shared fixtures through each).
-
-import dev.fughetta.dshcompose.R
 
 /** A file that is not strict JSON: where (1-based, UTF-16 columns) and why. */
 class UiJsonSyntaxError(val line: Int, val column: Int, val reason: UiMessage) : Exception() {

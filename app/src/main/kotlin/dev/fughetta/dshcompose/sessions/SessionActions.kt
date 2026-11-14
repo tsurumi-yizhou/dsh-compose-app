@@ -6,7 +6,7 @@ import android.net.Uri
 import androidx.lifecycle.viewModelScope
 import dev.fughetta.dshcompose.*
 import dev.fughetta.dshcompose.ClientApplication
-import dev.fughetta.dshcompose.R as UiR
+import dev.fughetta.dshcompose.R
 import dev.fughetta.dshcompose.appearance.*
 import dev.fughetta.dshcompose.domain.commands.*
 import dev.fughetta.dshcompose.domain.hosts.ConnectedHost
@@ -324,7 +324,7 @@ internal fun AppViewModel.pickCommand(id: String, name: String): Unit {
                         it.copy(
                             error =
                                 getApplication<Application>()
-                                    .getString(UiR.string.commands_unavailable),
+                                    .getString(R.string.commands_unavailable),
                         )
                     }
             }

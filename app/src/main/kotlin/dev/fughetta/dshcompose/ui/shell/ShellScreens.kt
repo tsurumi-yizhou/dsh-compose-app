@@ -37,6 +37,7 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import dev.fughetta.dshcompose.R
+import dev.fughetta.dshcompose.core.designsystem.R as CoreDesignsystemR
 import dev.fughetta.dshcompose.ui.ReadableWidth
 import dev.fughetta.dshcompose.ui.Spacing
 import dev.fughetta.dshcompose.ui.UpButton
@@ -57,7 +58,7 @@ private fun FeatureRow(entry: FeatureEntry, supporting: String? = null, onOpen: 
         supportingContent = supporting?.let { { Text(it) } },
         trailingContent = {
             Icon(
-                painterResource(R.drawable.ic_chevron_right),
+                painterResource(CoreDesignsystemR.drawable.ic_chevron_right),
                 null,
                 tint = MaterialTheme.colorScheme.onSurfaceVariant,
             )
@@ -115,7 +116,7 @@ fun SettingsSearchScreen(
                                 if (query.isNotEmpty())
                                     IconButton({ query = "" }) {
                                         Icon(
-                                            painterResource(R.drawable.ic_close),
+                                            painterResource(CoreDesignsystemR.drawable.ic_close),
                                             stringResource(R.string.settings_search_clear),
                                         )
                                     }
@@ -161,7 +162,10 @@ fun SettingsSearchScreen(
                             ListItem(
                                 content = { Text(text) },
                                 leadingContent = {
-                                    Icon(painterResource(R.drawable.ic_search), null)
+                                    Icon(
+                                        painterResource(CoreDesignsystemR.drawable.ic_search),
+                                        null,
+                                    )
                                 },
                                 modifier = Modifier.clickable { query = text },
                             )
@@ -176,7 +180,7 @@ fun SettingsSearchScreen(
                                         R.string.settings_search_empty,
                                         query.trim(),
                                     ),
-                                icon = R.drawable.ic_search,
+                                icon = CoreDesignsystemR.drawable.ic_search,
                             )
                         }
                         onAskAi?.let { ask ->
@@ -227,7 +231,7 @@ fun QuickPanelSettingsScreen(state: ShellPrefsState, onAction: (ShellPrefsAction
         containerColor = Color.Transparent,
         topBar = {
             TopAppBar(
-                title = { Text(stringResource(R.string.quick_panel_title)) },
+                title = { Text(stringResource(CoreDesignsystemR.string.quick_panel_title)) },
                 navigationIcon = { UpButton() },
             )
         },
@@ -604,7 +608,7 @@ fun QuickPanel(
                     CompositionLocalProvider(LocalLayoutDirection provides contentDirection) {
                         Column(Modifier.systemBarsPadding().padding(vertical = Spacing.Medium)) {
                             Text(
-                                stringResource(R.string.quick_panel_title),
+                                stringResource(CoreDesignsystemR.string.quick_panel_title),
                                 Modifier.padding(horizontal = 16.dp, vertical = Spacing.Medium),
                                 style = MaterialTheme.typography.titleMedium,
                             )

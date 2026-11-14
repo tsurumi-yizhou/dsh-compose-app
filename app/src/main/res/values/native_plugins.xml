@@ -1,22 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="native_plugin_close">Close</string>
-    <string name="native_plugin_cancel">Cancel</string>
-    <string name="native_plugin_allow">Allow</string>
-    <string name="native_plugin_confirm">Confirm</string>
-    <string name="native_plugin_submit">Submit</string>
-    <string name="native_plugin_invalid">This plugin view could not be displayed.</string>
-    <string name="native_plugin_invalid_value">Check this value.</string>
-    <string name="native_plugin_link_consent">Open %1$s in your browser?</string>
-    <string name="native_plugin_read_consent">Allow this plugin to read: %1$s?</string>
-    <string name="native_plugin_draft">draft</string>
-    <string name="native_plugin_clipboard">clipboard</string>
-    <string name="native_plugin_message">selected message</string>
-    <string name="native_plugin_composer">Composer actions</string>
-    <string name="native_plugin_tools">Composer tools</string>
-    <string name="native_plugin_message_actions">Message actions</string>
-    <string name="native_plugin_session_actions">Conversation actions</string>
-    <string name="native_plugin_strip">Composer status</string>
-    <string name="native_plugin_notes">Turn notes</string>
-    <string name="native_plugin_panels">Panels</string>
-    <string name="native_plugins_empty">No native plugins to configure.</string>
 </resources>

@@ -8,7 +8,6 @@ package dev.fughetta.dshcompose.ui.uiconfig
 // host: same
 // traversal order, same pointers, same words. Change both together; UiConfigParserTest runs the
 // shared fixtures through each.
-
 import dev.fughetta.dshcompose.R
 import kotlinx.serialization.json.*
 

@@ -11,7 +11,7 @@ package dev.fughetta.dshcompose.uiconfig
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.fughetta.dshcompose.R as UiR
+import dev.fughetta.dshcompose.R
 import dev.fughetta.dshcompose.domain.chat.ToolPayload
 import dev.fughetta.dshcompose.domain.settings.SettingsRepository
 import dev.fughetta.dshcompose.domain.uiconfig.UiConfigPorts
@@ -133,9 +133,8 @@ internal class UiConfigViewModel(
                         UiConfigRead.NotText -> {
                             lastText = null
                             val message =
-                                if (read == UiConfigRead.TooLarge)
-                                    UiR.string.ui_config_file_too_large
-                                else UiR.string.ui_config_not_text_file
+                                if (read == UiConfigRead.TooLarge) R.string.ui_config_file_too_large
+                                else R.string.ui_config_not_text_file
                             uiConfigBroken(UiMessage.Text(message), lastGood)
                         }
                         UiConfigRead.Absent -> {
